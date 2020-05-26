@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.distance.src.mapper.DemoMapper">
+
+    <!-- 根据id获取用户信息 -->
+    <select id="queryUserInfoById" resultType="com.distance.src.domain.database.DemoDO">
+       select * from ccty_demo where id = #{id}
+    </select>
+
+
+</mapper>
