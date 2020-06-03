@@ -10,6 +10,6 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
-  type-aliases-package: com.distance.src.domain.database
+  type-aliases-package: com.ccty.noah.domain.database
   configuration:
     map-underscore-to-camel-case: true
