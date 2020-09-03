@@ -6,8 +6,7 @@ import com.ccty.noah.aop.aspect.target.NoahController;
 import com.ccty.noah.domain.constance.ExceptionEnum;
 import com.ccty.noah.domain.dto.UserDTO;
 import com.ccty.noah.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +26,32 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @ApiOperation(value = "校验用户信息")
-    @PostMapping("/valid/userInfo")
-    public NoahResult<Boolean> validUserInfo(@RequestBody UserDTO userDTO){
+    @ApiModelProperty("校验用户名是否存在")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "用户名", required = true, paramType = "query", dataType = "string")
+    })
+    @PostMapping("/valid/name")
+    public NoahResult<Boolean> validUserName(@RequestParam("name") String name){
+        return NoahResult.builderSuccess(userService.validUserName(name));
+    }
+
+    @ApiModelProperty("根据用户名获取用户信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "用户名", required = true, paramType = "path", dataType = "string")
+    })
+    @GetMapping("/userInfo/{name}")
+    public NoahResult<UserDTO> getUserInfoByUserName(@PathVariable("name")String name){
+        return NoahResult.builderSuccess(userService.getUserInfoByUserName(name));
+    }
+
+
+
+    @ApiOperation(value = "登陆")
+    @PostMapping("/login")
+    public NoahResult<UserDTO> doLogin(@RequestBody UserDTO userDTO){
         Optional.ofNullable(userDTO).orElseThrow(() -> new NoahException(ExceptionEnum.USER_NULL_ERROR.getCode(), ExceptionEnum.USER_NULL_ERROR.getName()));
         Optional.ofNullable(userDTO.getName()).orElseThrow(() -> new NoahException(ExceptionEnum.USER_NAME_NULL_ERROR.getCode(), ExceptionEnum.USER_NAME_NULL_ERROR.getName()));
-        return NoahResult.builderSuccess(userService.validUser(userDTO));
+        Optional.ofNullable(userDTO.getPassword()).orElseThrow(() -> new NoahException(ExceptionEnum.PASSWORD_NULL_ERROR.getCode(), ExceptionEnum.PASSWORD_NULL_ERROR.getName()));
+        return NoahResult.builderSuccess(userService.doLogin(userDTO));
     }
 }

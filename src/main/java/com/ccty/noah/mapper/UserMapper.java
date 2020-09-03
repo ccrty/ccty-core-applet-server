@@ -1,6 +1,8 @@
 package com.ccty.noah.mapper;
 
+import com.ccty.noah.domain.database.UserDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,4 +19,19 @@ public interface UserMapper {
      * @return
      */
     Integer queryInfoByUserName(String username);
+
+    /**
+     * 根据用户名获取用户信息
+     * @param name
+     * @return
+     */
+    UserDO queryUserInfoByUserName(String name);
+
+    /**
+     * 根据用户名和密码获取用户信息
+     * @param name
+     * @param password
+     * @return
+     */
+    UserDO queryInfoByUserNameAndPwd(@Param("name")String name,@Param("password") String password);
 }

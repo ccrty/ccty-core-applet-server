@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @ApiModel("用户对象")
 @Data
-public class UserDTO extends BaseDTO {
+public class UserDTO extends BaseDTO{
 
     @ApiModelProperty(value = "名字")
     private String name;
@@ -39,5 +39,14 @@ public class UserDTO extends BaseDTO {
 
     @ApiModelProperty("地区")
     private String area;
+
+    @ApiModelProperty("权限")
+    public String[] roles = {"admin"};
+    @ApiModelProperty("令牌")
+    public String token = "token";
+    @ApiModelProperty("介绍")
+    public String introduction = "管理员";
+    @ApiModelProperty("头像")
+    public String avatar = "https://c-ssl.duitang.com/uploads/item/201510/18/20151018124127_eihj3.jpeg";
 
 }
