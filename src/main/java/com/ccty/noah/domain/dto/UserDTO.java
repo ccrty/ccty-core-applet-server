@@ -16,7 +16,7 @@ public class UserDTO extends BaseDTO {
     @ApiModelProperty(value = "名字")
     private String name;
 
-    @ApiModelProperty(value = "名字")
+    @ApiModelProperty(value = "密码")
     private String password;
 
     @ApiModelProperty("昵称")
