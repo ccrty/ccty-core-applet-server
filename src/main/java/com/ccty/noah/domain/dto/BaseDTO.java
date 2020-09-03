@@ -15,13 +15,13 @@ import java.util.Date;
 public class BaseDTO {
 
     @ApiModelProperty(value = "id",example = "0")
-    public Integer id;
+    public Long id;
 
     @ApiModelProperty(value = "创建人ID",example = "0")
-    public Integer creator;
+    public String creator;
 
     @ApiModelProperty(value = "修改人ID",example = "0")
-    public Integer modifier;
+    public String modifier;
 
     @ApiModelProperty(value = "创建时间")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")

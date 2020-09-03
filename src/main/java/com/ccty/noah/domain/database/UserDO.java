@@ -1,5 +1,6 @@
 package com.ccty.noah.domain.database;
 
+import com.ccty.noah.domain.database.BaseDO;
 import lombok.Data;
 
 /**

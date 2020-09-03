@@ -12,11 +12,11 @@ import java.util.Date;
 @Data
 public class BaseDO {
     /**id*/
-    public Integer id;
+    public Long id;
     /**创建人*/
-    public Integer creator;
+    public String creator;
     /**修改人*/
-    public Integer modifier;
+    public String modifier;
     /**创建时间*/
     public Date createTime;
     /**修改时间*/
