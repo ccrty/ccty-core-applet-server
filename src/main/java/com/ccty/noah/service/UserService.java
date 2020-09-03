@@ -24,8 +24,9 @@ public interface UserService {
 
     /**
      * 登陆
-     * @param userDTO
+     * @param name
+     * @param password
      * @return
      */
-    UserDTO doLogin(UserDTO userDTO);
+    UserDTO doLogin(String name,String password);
 }

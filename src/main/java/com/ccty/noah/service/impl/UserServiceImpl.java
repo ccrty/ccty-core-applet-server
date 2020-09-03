@@ -55,13 +55,14 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 登陆
-     * @param user
+     * @param name
+     * @param password
      * @return
      */
     @Override
-    public UserDTO doLogin(UserDTO user) {
-        String password = SecureUtil.md5(user.getPassword());
-        UserDO userDO = userMapper.queryInfoByUserNameAndPwd(user.getName(),password);
+    public UserDTO doLogin(String name,String password) {
+        String passwordMd5 = SecureUtil.md5(password);
+        UserDO userDO = userMapper.queryInfoByUserNameAndPwd(name,passwordMd5);
         UserDTO userDTO = userConvertor.userDOToUserDTO(userDO);
         Optional.ofNullable(userDTO)
                 .orElseThrow(() -> new NoahException(ExceptionEnum.USER_PASSWORD_ERROR.getCode(), ExceptionEnum.USER_PASSWORD_ERROR.getName()));

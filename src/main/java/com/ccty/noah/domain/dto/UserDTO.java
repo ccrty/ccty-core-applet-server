@@ -43,7 +43,7 @@ public class UserDTO extends BaseDTO{
     @ApiModelProperty("权限")
     public String[] roles = {"admin"};
     @ApiModelProperty("令牌")
-    public String token = "token";
+    public String token = "admin";
     @ApiModelProperty("介绍")
     public String introduction = "管理员";
     @ApiModelProperty("头像")

@@ -44,14 +44,13 @@ public class UserController {
         return NoahResult.builderSuccess(userService.getUserInfoByUserName(name));
     }
 
-
-
     @ApiOperation(value = "登陆")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "用户名", required = true, paramType = "query", dataType = "string"),
+            @ApiImplicitParam(name = "password", value = "密码", required = true, paramType = "query", dataType = "string")
+    })
     @PostMapping("/login")
-    public NoahResult<UserDTO> doLogin(@RequestBody UserDTO userDTO){
-        Optional.ofNullable(userDTO).orElseThrow(() -> new NoahException(ExceptionEnum.USER_NULL_ERROR.getCode(), ExceptionEnum.USER_NULL_ERROR.getName()));
-        Optional.ofNullable(userDTO.getName()).orElseThrow(() -> new NoahException(ExceptionEnum.USER_NAME_NULL_ERROR.getCode(), ExceptionEnum.USER_NAME_NULL_ERROR.getName()));
-        Optional.ofNullable(userDTO.getPassword()).orElseThrow(() -> new NoahException(ExceptionEnum.PASSWORD_NULL_ERROR.getCode(), ExceptionEnum.PASSWORD_NULL_ERROR.getName()));
-        return NoahResult.builderSuccess(userService.doLogin(userDTO));
+    public NoahResult<UserDTO> doLogin(@RequestParam("name")String name,@RequestParam("password")String password){
+        return NoahResult.builderSuccess(userService.doLogin(name,password));
     }
 }
