@@ -11,7 +11,6 @@ import com.ccty.noah.mapper.UserMapper;
 import com.ccty.noah.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.util.Optional;
 
 /**
@@ -23,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
-    @Resource
+    @Autowired
     private UserConvertor userConvertor;
 
 
