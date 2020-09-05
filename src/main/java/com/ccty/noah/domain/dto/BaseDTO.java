@@ -1,6 +1,7 @@
 package com.ccty.noah.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -12,6 +13,7 @@ import java.util.Date;
  * @date   2020/08/26
  */
 @Data
+@ApiModel
 public class BaseDTO {
 
     @ApiModelProperty(value = "id",example = "0")

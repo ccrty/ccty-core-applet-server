@@ -1,9 +1,12 @@
 package com.ccty.noah.mapper;
 
 import com.ccty.noah.domain.database.UserDO;
+import com.ccty.noah.domain.database.UserListConditionDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * @author 缄默
@@ -34,4 +37,11 @@ public interface UserMapper {
      * @return
      */
     UserDO queryInfoByUserNameAndPwd(@Param("name")String name,@Param("password") String password);
+
+    /**
+     * 根据条件获取用户信息
+     * @param condition
+     * @return
+     */
+    List<UserDO> queryUserListByCondition(UserListConditionDO condition);
 }

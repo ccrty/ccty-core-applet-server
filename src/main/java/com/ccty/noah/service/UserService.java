@@ -1,6 +1,10 @@
 package com.ccty.noah.service;
 
 import com.ccty.noah.domain.dto.UserDTO;
+import com.ccty.noah.domain.dto.UserListConditionDTO;
+import com.github.pagehelper.PageInfo;
+
+import java.util.List;
 
 /**
  * @author 缄默
@@ -29,4 +33,11 @@ public interface UserService {
      * @return
      */
     UserDTO doLogin(String name,String password);
+
+    /**
+     * 根据条件查询用户列表
+     * @param condition
+     * @return
+     */
+    PageInfo<UserDTO> getUserListByCondition(UserListConditionDTO condition);
 }

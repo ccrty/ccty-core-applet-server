@@ -1,9 +1,13 @@
 package com.ccty.noah.domain.convertor;
 
 import com.ccty.noah.domain.database.UserDO;
+import com.ccty.noah.domain.database.UserListConditionDO;
 import com.ccty.noah.domain.dto.UserDTO;
+import com.ccty.noah.domain.dto.UserListConditionDTO;
 import com.ccty.noah.util.EntityFactory;
 import org.mapstruct.Mapper;
+
+import java.util.List;
 
 /**
  * @author 缄默
@@ -18,5 +22,19 @@ public interface UserConvertor {
      * @return
      */
     UserDTO userDOToUserDTO(UserDO userDO);
+
+    /**
+     * 条件DTO对象转换DO对象
+     * @param condition
+     * @return
+     */
+    UserListConditionDO conditionDTOToDO(UserListConditionDTO condition);
+
+    /**
+     * listDO转换DTO
+     * @param userDOList
+     * @return
+     */
+    List<UserDTO> userDOListToDTO(List<UserDO> userDOList);
 
 }

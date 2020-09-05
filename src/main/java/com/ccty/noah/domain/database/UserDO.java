@@ -14,6 +14,9 @@ public class UserDO extends BaseDO {
     /**名字*/
     private String name;
 
+    /**会员等级*/
+    private Integer level;
+
     /**密码*/
     private String password;
 

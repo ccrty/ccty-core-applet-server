@@ -5,12 +5,15 @@ import com.ccty.noah.aop.aspect.exception.NoahException;
 import com.ccty.noah.aop.aspect.target.NoahController;
 import com.ccty.noah.domain.constance.ExceptionEnum;
 import com.ccty.noah.domain.dto.UserDTO;
+import com.ccty.noah.domain.dto.UserListConditionDTO;
 import com.ccty.noah.service.UserService;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -52,5 +55,11 @@ public class UserController {
     @PostMapping("/login")
     public NoahResult<UserDTO> doLogin(@RequestParam("name")String name,@RequestParam("password")String password){
         return NoahResult.builderSuccess(userService.doLogin(name,password));
+    }
+
+    @ApiOperation("获取用户列表")
+    @GetMapping("/list")
+    public NoahResult<PageInfo<UserDTO>> getUserListByCondition(UserListConditionDTO condition){
+        return NoahResult.builderSuccess(userService.getUserListByCondition(condition));
     }
 }

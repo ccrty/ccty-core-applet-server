@@ -40,6 +40,9 @@ public class UserDTO extends BaseDTO{
     @ApiModelProperty("地区")
     private String area;
 
+    @ApiModelProperty("会员等级")
+    private Integer level;
+
     @ApiModelProperty("权限")
     public String[] roles = {"admin"};
     @ApiModelProperty("令牌")
