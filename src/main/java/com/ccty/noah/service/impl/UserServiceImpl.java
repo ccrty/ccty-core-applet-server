@@ -15,6 +15,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -89,6 +90,20 @@ public class UserServiceImpl implements UserService {
         List<UserDTO> userDTOS = userConvertor.userDOListToDTO(userList);
         pageInfo.setList(userDTOS);
         return pageInfo;
+    }
+
+    /**
+     * 校验用户名是否重复
+     * @param name 用户名
+     * @return
+     */
+    @Override
+    public Boolean reValidUserName(String name) {
+        //用户不存在就抛出错误
+        if(!ObjectUtils.isEmpty(userMapper.queryInfoByUserName(name))){
+            throw new NoahException(ExceptionEnum.USER_REPEAT_ERROR.getCode(),ExceptionEnum.USER_REPEAT_ERROR.getName());
+        }
+        return Boolean.TRUE;
     }
 
 }

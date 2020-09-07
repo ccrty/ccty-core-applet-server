@@ -40,4 +40,11 @@ public interface UserService {
      * @return
      */
     PageInfo<UserDTO> getUserListByCondition(UserListConditionDTO condition);
+
+    /**
+     * 校验用户名是否重复
+     * @param name
+     * @return
+     */
+    Boolean reValidUserName(String name);
 }

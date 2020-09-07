@@ -13,3 +13,10 @@ mybatis:
   type-aliases-package: com.ccty.noah.domain.database
   configuration:
     map-underscore-to-camel-case: true
+
+aliyun:
+  SMS:
+    accessKeyId: 1
+    accessSecret: 2
+    singleName: 3
+    templateCode: 4

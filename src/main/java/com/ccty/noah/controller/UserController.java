@@ -62,4 +62,13 @@ public class UserController {
     public NoahResult<PageInfo<UserDTO>> getUserListByCondition(UserListConditionDTO condition){
         return NoahResult.builderSuccess(userService.getUserListByCondition(condition));
     }
+
+    @ApiModelProperty("校验用户名是否重复")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "用户名", required = true, paramType = "query", dataType = "string")
+    })
+    @PostMapping("/reValid/name")
+    public NoahResult<Boolean> reValidUserName(@RequestParam("name") String name){
+        return NoahResult.builderSuccess(userService.reValidUserName(name));
+    }
 }
