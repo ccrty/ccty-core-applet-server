@@ -6,6 +6,7 @@
        select 1
        from school_user
        where is_deleted = 0 and name = #{username}
+       order by id desc
        limit 1
     </select>
 
@@ -41,6 +42,14 @@
         values
         (#{type},#{managerType},#{password},#{name},#{sex},#{phone})
     </insert>
+
+    <select id="queryInfoByPhone" resultType="com.ccty.noah.domain.database.UserDO">
+       select id,name,nickname,sex,phone,language,country,city,area
+       from school_user
+       where is_deleted = 0 and name = #{username}
+       order by id desc
+       limit 1
+    </select>
 
 
 </mapper>

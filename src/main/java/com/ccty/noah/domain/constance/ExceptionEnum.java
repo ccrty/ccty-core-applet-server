@@ -11,7 +11,8 @@ public enum ExceptionEnum {
     USER_REPEAT_ERROR("003","用户名重复"),
     SEND_SMS_ERROR("004","短信发送失败"),
     CODE_INPUT_ERROR("005","验证码错误"),
-    CODE_EXPIRED_ERROR("006","验证码过期");
+    CODE_EXPIRED_ERROR("006","验证码过期"),
+    PHONE_ERROR("007","手机号不存在");
 
     private String code;
     private String name;

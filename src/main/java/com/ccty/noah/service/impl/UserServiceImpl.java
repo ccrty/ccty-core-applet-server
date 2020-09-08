@@ -174,4 +174,19 @@ public class UserServiceImpl implements UserService {
         userMapper.insertUser(userDO);
     }
 
+    /**
+     * 手机号登陆
+     * @param phone
+     * @return
+     */
+    @Override
+    public UserDTO doLogin(String phone) {
+        //根据手机号获取用户信息
+        UserDO userDO = userMapper.queryInfoByPhone(phone);
+        UserDTO userDTO = userConvertor.userDOToUserDTO(userDO);
+        Optional.ofNullable(userDTO)
+                .orElseThrow(() -> new NoahException(ExceptionEnum.PHONE_ERROR.getCode(), ExceptionEnum.PHONE_ERROR.getName()));
+        return userDTO;
+    }
+
 }

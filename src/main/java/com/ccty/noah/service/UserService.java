@@ -68,4 +68,11 @@ public interface UserService {
      * @param user
      */
     void doRegister(UserDTO user);
+
+    /**
+     * 手机号登陆
+     * @param phone
+     * @return
+     */
+    UserDTO doLogin(String phone);
 }

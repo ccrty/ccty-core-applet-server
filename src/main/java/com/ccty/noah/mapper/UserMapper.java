@@ -50,4 +50,11 @@ public interface UserMapper {
      * @param userDO
      */
     void insertUser(UserDO userDO);
+
+    /**
+     * 根据手机号获取用户信息
+     * @param phone
+     * @return
+     */
+    UserDO queryInfoByPhone(String phone);
 }

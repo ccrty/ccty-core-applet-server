@@ -92,4 +92,13 @@ public class UserController {
         userService.doRegister(user);
         return NoahResult.builderSuccess(Boolean.TRUE);
     }
+
+    @ApiOperation(value = "手机号登陆")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phone", value = "手机号", required = true, paramType = "query", dataType = "string")
+    })
+    @PostMapping("/login/phone")
+    public NoahResult<UserDTO> doLogin(@RequestParam("phone")String phone){
+        return NoahResult.builderSuccess(userService.doLogin(phone));
+    }
 }
