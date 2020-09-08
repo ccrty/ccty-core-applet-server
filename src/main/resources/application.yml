@@ -16,7 +16,7 @@ mybatis:
 
 aliyun:
   SMS:
-    accessKeyId: 1
-    accessSecret: 2
-    singleName: 3
-    templateCode: 4
+    accessKeyId: LTAI4G2C2oGF9LjkVBsLe5V9
+    accessSecret: 7qssSp5jDPmRQvyHzYHSu3HPxSPZAp
+    singleName: 校V家
+    templateCode: SMS_201717216

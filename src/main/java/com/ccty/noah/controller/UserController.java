@@ -1,9 +1,7 @@
 package com.ccty.noah.controller;
 
 import com.ccty.noah.aop.aspect.NoahResult;
-import com.ccty.noah.aop.aspect.exception.NoahException;
 import com.ccty.noah.aop.aspect.target.NoahController;
-import com.ccty.noah.domain.constance.ExceptionEnum;
 import com.ccty.noah.domain.dto.UserDTO;
 import com.ccty.noah.domain.dto.UserListConditionDTO;
 import com.ccty.noah.service.UserService;
@@ -12,9 +10,6 @@ import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 /**
  * @author 缄默
@@ -70,5 +65,31 @@ public class UserController {
     @PostMapping("/reValid/name")
     public NoahResult<Boolean> reValidUserName(@RequestParam("name") String name){
         return NoahResult.builderSuccess(userService.reValidUserName(name));
+    }
+
+    @ApiModelProperty("发送短信验证码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phone", value = "手机号", required = true, paramType = "query", dataType = "string")
+    })
+    @PostMapping("/SMS/code")
+    public NoahResult<Boolean> sendSMS(@RequestParam("phone") String phone){
+        return NoahResult.builderSuccess(userService.sendSMS(phone));
+    }
+
+    @ApiModelProperty("校验验证码是否正确")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phone", value = "手机号", required = true, paramType = "query", dataType = "string"),
+            @ApiImplicitParam(name = "code", value = "验证码", required = true, paramType = "query", dataType = "string")
+    })
+    @PostMapping("/valid/code")
+    public NoahResult<Boolean> validCode(@RequestParam("phone") String phone,@RequestParam("code") String code){
+        return NoahResult.builderSuccess(userService.validCode(phone,code));
+    }
+
+    @ApiModelProperty("注册用户")
+    @PostMapping("/register")
+    public NoahResult<Boolean> doRegister(@RequestBody UserDTO user){
+        userService.doRegister(user);
+        return NoahResult.builderSuccess(Boolean.TRUE);
     }
 }

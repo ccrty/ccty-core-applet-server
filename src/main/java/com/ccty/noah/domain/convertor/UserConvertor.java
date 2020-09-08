@@ -24,6 +24,13 @@ public interface UserConvertor {
     UserDTO userDOToUserDTO(UserDO userDO);
 
     /**
+     * 用户DTO对象转DO对象
+     * @param userDTO
+     * @return
+     */
+    UserDO userDTOToDO(UserDTO userDTO);
+
+    /**
      * 条件DTO对象转换DO对象
      * @param condition
      * @return

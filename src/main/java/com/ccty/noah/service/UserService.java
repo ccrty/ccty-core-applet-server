@@ -47,4 +47,25 @@ public interface UserService {
      * @return
      */
     Boolean reValidUserName(String name);
+
+    /**
+     * 发送短信验证码
+     * @param phone
+     * @return
+     */
+    Boolean sendSMS(String phone);
+
+    /**
+     * 校验短信验证码
+     * @param phone
+     * @param code
+     * @return
+     */
+    Boolean validCode(String phone,String code);
+
+    /**
+     * 注册用户
+     * @param user
+     */
+    void doRegister(UserDTO user);
 }

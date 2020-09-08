@@ -41,4 +41,9 @@ public class UserDO extends BaseDO {
     /**地区*/
     private String area;
 
+    /** 用户类型 */
+    private String type;
+
+    /** 管理员类型 */
+    private String managerType;
 }

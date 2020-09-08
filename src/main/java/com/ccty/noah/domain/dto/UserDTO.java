@@ -43,6 +43,12 @@ public class UserDTO extends BaseDTO{
     @ApiModelProperty("会员等级")
     private Integer level;
 
+    @ApiModelProperty("管理员类型")
+    private Integer managerType;
+
+    @ApiModelProperty("用户类型")
+    private Integer type;
+
     @ApiModelProperty("权限")
     public String[] roles = {"admin"};
     @ApiModelProperty("令牌")

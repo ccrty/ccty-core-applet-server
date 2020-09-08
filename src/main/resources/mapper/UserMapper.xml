@@ -35,5 +35,12 @@
         </if>
     </select>
 
+    <insert id="insertUser" parameterType="com.ccty.noah.domain.database.UserDO">
+        insert into school_user
+        (type,manager_type,password,name,sex,phone)
+        values
+        (#{type},#{managerType},#{password},#{name},#{sex},#{phone})
+    </insert>
+
 
 </mapper>

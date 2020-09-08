@@ -1,5 +1,7 @@
 package com.ccty.noah.util;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
@@ -35,14 +37,13 @@ public class AliyunSmsUtils {
     private String templateCode;
 
 
-
     /**
      * 发送短信
      * @param phone
      * @param code
      * @return
      */
-    public String sendSMS(String phone,String code){
+    public void sendSMS(String phone,String code){
         DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessSecret);
         IAcsClient client = new DefaultAcsClient(profile);
 
@@ -50,7 +51,7 @@ public class AliyunSmsUtils {
 
         request.setMethod(MethodType.POST);
         request.setDomain("dysmsapi.aliyuncs.com");
-        request.setVersion("001");
+        request.setVersion("2017-05-25");
         request.setAction("SendSms");
         request.putQueryParameter("RegionId", "cn-hangzhou");
         request.putQueryParameter("PhoneNumbers", phone);
@@ -59,7 +60,12 @@ public class AliyunSmsUtils {
         request.putQueryParameter("TemplateParam", "{\"code\":"+code+"}");
         try {
             CommonResponse response = client.getCommonResponse(request);
-            return response.getData();
+            JSONObject result = JSON.parseObject(response.getData());
+            String resultCode = result.getString("Code");
+            if("OK".equals(resultCode)){
+                return;
+            }
+            throw new NoahException(ExceptionEnum.SEND_SMS_ERROR.getCode(),ExceptionEnum.SEND_SMS_ERROR.getName()+":"+result.getString("Message"));
         } catch (Exception e) {
             log.error("短信发送失败:{}",e);
         }

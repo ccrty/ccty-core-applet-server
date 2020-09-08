@@ -44,4 +44,10 @@ public interface UserMapper {
      * @return
      */
     List<UserDO> queryUserListByCondition(UserListConditionDO condition);
+
+    /**
+     * 新增用户
+     * @param userDO
+     */
+    void insertUser(UserDO userDO);
 }
