@@ -4,11 +4,13 @@ import com.ccty.noah.aop.aspect.NoahResult;
 import com.ccty.noah.aop.aspect.target.NoahController;
 import com.ccty.noah.domain.dto.UserDTO;
 import com.ccty.noah.domain.dto.UserListConditionDTO;
+import com.ccty.noah.domain.dto.UserRegisterDTO;
 import com.ccty.noah.service.UserService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -76,29 +78,20 @@ public class UserController {
         return NoahResult.builderSuccess(userService.sendSMS(phone));
     }
 
-    @ApiModelProperty("校验验证码是否正确")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "phone", value = "手机号", required = true, paramType = "query", dataType = "string"),
-            @ApiImplicitParam(name = "code", value = "验证码", required = true, paramType = "query", dataType = "string")
-    })
-    @PostMapping("/valid/code")
-    public NoahResult<Boolean> validCode(@RequestParam("phone") String phone,@RequestParam("code") String code){
-        return NoahResult.builderSuccess(userService.validCode(phone,code));
-    }
-
     @ApiModelProperty("注册用户")
     @PostMapping("/register")
-    public NoahResult<Boolean> doRegister(@RequestBody UserDTO user){
+    public NoahResult<Boolean> doRegister(@RequestBody @Validated UserRegisterDTO user){
         userService.doRegister(user);
         return NoahResult.builderSuccess(Boolean.TRUE);
     }
 
     @ApiOperation(value = "手机号登陆")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "phone", value = "手机号", required = true, paramType = "query", dataType = "string")
+            @ApiImplicitParam(name = "phone", value = "手机号", required = true, paramType = "query", dataType = "string"),
+            @ApiImplicitParam(name = "code", value = "验证码", required = true, paramType = "query", dataType = "string")
     })
     @PostMapping("/login/phone")
-    public NoahResult<UserDTO> doLogin(@RequestParam("phone")String phone){
-        return NoahResult.builderSuccess(userService.doLogin(phone));
+    public NoahResult<UserDTO> doLoginByPhone(@RequestParam("phone")String phone,@RequestParam("code")String code){
+        return NoahResult.builderSuccess(userService.doLoginByPhone(phone,code));
     }
 }

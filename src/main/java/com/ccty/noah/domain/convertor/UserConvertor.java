@@ -4,6 +4,7 @@ import com.ccty.noah.domain.database.UserDO;
 import com.ccty.noah.domain.database.UserListConditionDO;
 import com.ccty.noah.domain.dto.UserDTO;
 import com.ccty.noah.domain.dto.UserListConditionDTO;
+import com.ccty.noah.domain.dto.UserRegisterDTO;
 import com.ccty.noah.util.EntityFactory;
 import org.mapstruct.Mapper;
 
@@ -28,7 +29,7 @@ public interface UserConvertor {
      * @param userDTO
      * @return
      */
-    UserDO userDTOToDO(UserDTO userDTO);
+    UserDO userDTOToDO(UserRegisterDTO userDTO);
 
     /**
      * 条件DTO对象转换DO对象

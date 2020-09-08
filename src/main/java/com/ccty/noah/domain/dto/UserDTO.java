@@ -49,6 +49,9 @@ public class UserDTO extends BaseDTO{
     @ApiModelProperty("用户类型")
     private Integer type;
 
+    @ApiModelProperty("短信验证码")
+    private String code;
+
     @ApiModelProperty("权限")
     public String[] roles = {"admin"};
     @ApiModelProperty("令牌")

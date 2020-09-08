@@ -13,6 +13,7 @@ import com.ccty.noah.domain.database.UserListConditionDO;
 import com.ccty.noah.domain.dto.CodeDTO;
 import com.ccty.noah.domain.dto.UserDTO;
 import com.ccty.noah.domain.dto.UserListConditionDTO;
+import com.ccty.noah.domain.dto.UserRegisterDTO;
 import com.ccty.noah.mapper.UserMapper;
 import com.ccty.noah.service.UserService;
 import com.ccty.noah.util.AliyunSmsUtils;
@@ -127,7 +128,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Boolean sendSMS(String phone) {
-        String code = String.valueOf((int)(Math.random()*9+1)*100000);
+        String code = String.valueOf((int)((Math.random()*9+1)*100000));
         //发送短信
         smsUtils.sendSMS(phone,code);
         CodeDTO codeDTO = new CodeDTO(phone,code,new Date());
@@ -142,8 +143,7 @@ public class UserServiceImpl implements UserService {
      * @param code
      * @return
      */
-    @Override
-    public Boolean validCode(String phone,String code) {
+    private void validCode(String phone,String code) {
         //获取缓存数据
         CodeDTO codeDTO = codeCache.get(phone);
         if(ObjectUtils.isEmpty(codeDTO)){
@@ -159,7 +159,6 @@ public class UserServiceImpl implements UserService {
         if(between>5){
             throw new NoahException(ExceptionEnum.CODE_EXPIRED_ERROR.getCode(),ExceptionEnum.CODE_EXPIRED_ERROR.getName());
         }
-        return Boolean.TRUE;
     }
 
     /**
@@ -167,7 +166,9 @@ public class UserServiceImpl implements UserService {
      * @param user
      */
     @Override
-    public void doRegister(UserDTO user) {
+    public void doRegister(UserRegisterDTO user) {
+        //校验短信验证码
+        validCode(user.getPhone(),user.getCode());
         user.setPassword(SecureUtil.md5(user.getPassword()));
         user.setType(UserConst.MANAGER_TYPE);
         UserDO userDO = userConvertor.userDTOToDO(user);
@@ -177,10 +178,13 @@ public class UserServiceImpl implements UserService {
     /**
      * 手机号登陆
      * @param phone
+     * @param code
      * @return
      */
     @Override
-    public UserDTO doLogin(String phone) {
+    public UserDTO doLoginByPhone(String phone,String code) {
+        //校验短信验证码
+        validCode(phone,code);
         //根据手机号获取用户信息
         UserDO userDO = userMapper.queryInfoByPhone(phone);
         UserDTO userDTO = userConvertor.userDOToUserDTO(userDO);

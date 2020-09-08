@@ -46,7 +46,7 @@
     <select id="queryInfoByPhone" resultType="com.ccty.noah.domain.database.UserDO">
        select id,name,nickname,sex,phone,language,country,city,area
        from school_user
-       where is_deleted = 0 and name = #{username}
+       where is_deleted = 0 and phone = #{phone}
        order by id desc
        limit 1
     </select>

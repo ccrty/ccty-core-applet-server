@@ -2,6 +2,7 @@ package com.ccty.noah.service;
 
 import com.ccty.noah.domain.dto.UserDTO;
 import com.ccty.noah.domain.dto.UserListConditionDTO;
+import com.ccty.noah.domain.dto.UserRegisterDTO;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -56,23 +57,16 @@ public interface UserService {
     Boolean sendSMS(String phone);
 
     /**
-     * 校验短信验证码
-     * @param phone
-     * @param code
-     * @return
-     */
-    Boolean validCode(String phone,String code);
-
-    /**
      * 注册用户
      * @param user
      */
-    void doRegister(UserDTO user);
+    void doRegister(UserRegisterDTO user);
 
     /**
      * 手机号登陆
      * @param phone
+     * @param code
      * @return
      */
-    UserDTO doLogin(String phone);
+    UserDTO doLoginByPhone(String phone,String code);
 }
