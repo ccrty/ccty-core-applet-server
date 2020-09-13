@@ -1,6 +1,8 @@
 package com.ccty.noah.service.applets;
 
+import com.ccty.noah.domain.dto.PageDTO;
 import com.ccty.noah.domain.dto.applets.NewsDTO;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -15,4 +17,11 @@ public interface NewsService {
      * @return
      */
     List<NewsDTO> getNewsTopFive();
+
+    /**
+     * 分页获取网站资讯前五条
+     * @param page
+     * @return
+     */
+    PageInfo<NewsDTO> getNewsByPage(PageDTO page);
 }

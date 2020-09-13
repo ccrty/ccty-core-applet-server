@@ -11,5 +11,12 @@
        limit 5
     </select>
 
+    <select id="queryNewsByPage" resultType="com.ccty.noah.domain.database.applets.NewsDO">
+       select id,title,content,url,creator,create_time
+       from school_news
+       where is_deleted=0 and type=1
+       order by id desc
+    </select>
+
 
 </mapper>

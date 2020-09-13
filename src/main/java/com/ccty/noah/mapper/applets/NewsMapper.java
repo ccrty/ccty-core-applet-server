@@ -19,4 +19,6 @@ public interface NewsMapper {
      * @return
      */
     List<NewsDO> queryNewsTopFive();
+
+    List<NewsDO> queryNewsByPage();
 }

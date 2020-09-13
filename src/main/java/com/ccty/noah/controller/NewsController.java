@@ -1,10 +1,15 @@
-package com.ccty.noah.controller.applets;
+package com.ccty.noah.controller;
 
 import com.ccty.noah.aop.aspect.NoahResult;
 import com.ccty.noah.aop.aspect.target.NoahController;
+import com.ccty.noah.domain.dto.PageDTO;
+import com.ccty.noah.domain.dto.UserDTO;
+import com.ccty.noah.domain.dto.applets.NewsDTO;
 import com.ccty.noah.service.applets.NewsService;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +32,13 @@ public class NewsController {
 
     @ApiModelProperty("获取网站资讯前五条")
     @GetMapping("/top")
-    public NoahResult<List<NewsController>> getNewsTopFive(){
+    public NoahResult<List<NewsDTO>> getNewsTopFive(){
         return NoahResult.builderSuccess(newsService.getNewsTopFive());
+    }
+
+    @ApiOperation("分页获取资讯列表")
+    @GetMapping("/page")
+    public NoahResult<PageInfo<UserDTO>> getNewsByPage(PageDTO page){
+        return NoahResult.builderSuccess(newsService.getNewsByPage(page));
     }
 }
