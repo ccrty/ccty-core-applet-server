@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccty.noah.mapper.applets.NewsMapper">
+
+    <!-- 根据id获取用户信息 -->
+    <select id="queryNewsTopFive" resultType="com.ccty.noah.domain.database.applets.NewsDO">
+       select id,title,content,url,creator,create_time
+       from school_news
+       where is_deleted=0 and type=1
+       order by id desc
+       limit 5
+    </select>
+
+
+</mapper>
