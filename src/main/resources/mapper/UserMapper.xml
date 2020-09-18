@@ -49,7 +49,7 @@
        where is_deleted = 0 and phone = #{phone}
        order by id desc
        limit 1
-    </select>.
+    </select>
 
 
 </mapper>

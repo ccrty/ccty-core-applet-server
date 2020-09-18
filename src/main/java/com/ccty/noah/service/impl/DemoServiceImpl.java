@@ -1,6 +1,6 @@
 package com.ccty.noah.service.impl;
 
-import com.ccty.noah.aop.aspect.target.NoahService;
+import com.ccty.noah.aop.target.NoahService;
 import com.ccty.noah.domain.convertor.DemoConvertor;
 import com.ccty.noah.mapper.DemoMapper;
 import com.ccty.noah.domain.dto.DemoDTO;

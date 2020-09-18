@@ -1,8 +1,8 @@
 package com.ccty.noah.controller;
 
-import com.ccty.noah.aop.aspect.NoahResult;
-import com.ccty.noah.aop.aspect.exception.NoahException;
-import com.ccty.noah.aop.aspect.target.NoahController;
+import com.ccty.noah.aop.NoahResult;
+import com.ccty.noah.aop.exception.NoahException;
+import com.ccty.noah.aop.target.NoahController;
 import com.ccty.noah.domain.dto.DemoDTO;
 import com.ccty.noah.service.DemoService;
 import io.swagger.annotations.Api;

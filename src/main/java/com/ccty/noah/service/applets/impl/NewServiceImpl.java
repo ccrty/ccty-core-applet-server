@@ -1,12 +1,9 @@
 package com.ccty.noah.service.applets.impl;
 
-import com.ccty.noah.aop.aspect.target.NoahService;
+import com.ccty.noah.aop.target.NoahService;
 import com.ccty.noah.domain.convertor.applets.NewsConvertor;
-import com.ccty.noah.domain.database.UserDO;
-import com.ccty.noah.domain.database.UserListConditionDO;
 import com.ccty.noah.domain.database.applets.NewsDO;
 import com.ccty.noah.domain.dto.PageDTO;
-import com.ccty.noah.domain.dto.UserDTO;
 import com.ccty.noah.domain.dto.applets.NewsDTO;
 import com.ccty.noah.mapper.applets.NewsMapper;
 import com.ccty.noah.service.applets.NewsService;
