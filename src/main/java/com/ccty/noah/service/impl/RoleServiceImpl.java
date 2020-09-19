@@ -6,6 +6,7 @@ import com.ccty.noah.domain.constance.ExceptionEnum;
 import com.ccty.noah.domain.convertor.RoleConvertor;
 import com.ccty.noah.domain.database.RoleDO;
 import com.ccty.noah.domain.dto.RoleDTO;
+import com.ccty.noah.mapper.RoleMapper;
 import com.ccty.noah.service.RoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ import java.util.Optional;
 @Slf4j
 public class RoleServiceImpl implements RoleService {
 
-    //@Autowired
-    //private RoleMapper roleMapper;
+    @Autowired
+    private RoleMapper roleMapper;
 
     @Autowired
     private RoleConvertor roleConvertor;
@@ -30,10 +31,10 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public Boolean validRoleName(String name) {
-        //Optional.ofNullable(
-        //        roleMapper.queryInfoByRoleName(name)).orElseThrow(
-        //                () -> new NoahException(ExceptionEnum.ROLE_NAME_ERROR.getCode(),
-        //                        ExceptionEnum.ROLE_NAME_ERROR.getName()));
+        Optional.ofNullable(
+               roleMapper.queryInfoByRoleName(name)).orElseThrow(
+                        () -> new NoahException(ExceptionEnum.ROLE_NAME_ERROR.getCode(),
+                                ExceptionEnum.ROLE_NAME_ERROR.getName()));
         return Boolean.TRUE;
     }
 
@@ -44,7 +45,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void doInsertRole(RoleDTO roleDTO) {
         RoleDO roleDO = roleConvertor.roleDOToRoleDTO(roleDTO);
-        //roleMapper.insertRole(roleDO);
+        roleMapper.insertRole(roleDO);
     }
 
 
