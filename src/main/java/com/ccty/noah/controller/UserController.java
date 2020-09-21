@@ -26,7 +26,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @ApiModelProperty(value = "校验用户名是否存在")
+    @ApiOperation(value = "校验用户名是否存在")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", value = "用户名", required = true, paramType = "query", dataType = "string")
     })
@@ -35,7 +35,7 @@ public class UserController {
         return NoahResult.builderSuccess(userService.validUserName(name));
     }
 
-    @ApiModelProperty("根据用户名获取用户信息")
+    @ApiOperation("根据用户名获取用户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", value = "用户名", required = true, paramType = "path", dataType = "string")
     })
@@ -60,7 +60,7 @@ public class UserController {
         return NoahResult.builderSuccess(userService.getUserListByCondition(condition));
     }
 
-    @ApiModelProperty(value = "校验用户名是否重复")
+    @ApiOperation(value = "校验用户名是否重复")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", value = "用户名", required = true, paramType = "query", dataType = "string")
     })
@@ -69,7 +69,7 @@ public class UserController {
         return NoahResult.builderSuccess(userService.reValidUserName(name));
     }
 
-    @ApiModelProperty(value = "发送短信验证码")
+    @ApiOperation(value = "发送短信验证码")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "phone", value = "手机号", required = true, paramType = "query", dataType = "string")
     })
@@ -78,7 +78,7 @@ public class UserController {
         return NoahResult.builderSuccess(userService.sendSMS(phone));
     }
 
-    @ApiModelProperty(value = "注册用户")
+    @ApiOperation(value = "注册用户")
     @PostMapping("/register")
     public NoahResult<Boolean> doRegister(@RequestBody @Validated UserRegisterDTO user){
         userService.doRegister(user);

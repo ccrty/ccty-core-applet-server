@@ -4,30 +4,30 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author ryan
- * @date 2020/09/16
+ * @author 缄默
+ * @date   2020/09/21
  */
 @Data
 @NoArgsConstructor
-public class RoleDO extends BaseDO{
+public class ResourcesDO extends BaseDO {
 
     /**
-     * 角色名
+     * 资源名称
      */
-    private  String name;
+    private String name;
 
     /**
-     * 等级
+     * 资源地址
      */
-    private Integer orderIndex;
+    private String address;
 
     /**
-     * 描述
+     * 资源描述
      */
     private String description;
 
     /**
-     * 类型
+     * 资源类型
      */
     private Integer type;
 

@@ -7,6 +7,7 @@ import com.ccty.noah.domain.dto.applets.WXUserLoginDTO;
 import com.ccty.noah.service.applets.WXLoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -27,7 +28,7 @@ public class WXLoginController {
     @Autowired
     private WXLoginService loginService;
 
-    @ApiModelProperty(value = "微信登陆 首次登陆注册用户")
+    @ApiOperation(value = "微信登陆 首次登陆注册用户")
     @PostMapping("/login")
     public NoahResult<Boolean> doLogin(@RequestBody @Validated WXUserLoginDTO user){
         loginService.doLogin(user);

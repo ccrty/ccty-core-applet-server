@@ -2,9 +2,11 @@ package com.ccty.noah.service;
 
 
 import com.ccty.noah.domain.dto.RoleDTO;
+import com.ccty.noah.domain.dto.RoleListConditionDTO;
+import com.github.pagehelper.PageInfo;
 
 /**
- * @author ryan
+ * @author ryan & 缄默
  * @date   2020/09/15
  */
 public interface RoleService {
@@ -21,4 +23,23 @@ public interface RoleService {
      * @return
      */
     void doInsertRole(RoleDTO roleDTO);
+
+    /**
+     * 根据条件获取角色列表
+     * @param condition
+     * @return
+     */
+    PageInfo<RoleDTO> getRoleListByCondition(RoleListConditionDTO condition);
+
+    /**
+     * 删除角色
+     * @param id
+     */
+    void doDeleteRole(Integer id);
+
+    /**
+     * 修改角色
+     * @param role
+     */
+    void doUpdateRole(RoleDTO role);
 }

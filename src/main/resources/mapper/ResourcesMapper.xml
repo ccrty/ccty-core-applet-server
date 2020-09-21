@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccty.noah.mapper.ResourcesMapper">
+
+    <insert id="insertResources" parameterType="com.ccty.noah.domain.database.ResourcesDO">
+        insert into school_resources
+        (name,address,description,type)
+        values
+        (#{name},#{address},#{description},#{type})
+    </insert>
+
+    <select id="queryResourcesListByCondition" resultType="com.ccty.noah.domain.database.ResourcesDO">
+        select id,name,address,description,type,create_time
+        from school_resources
+        where is_deleted = 0
+        <if test="name!='' and name!=null">
+            and name = #{name}
+        </if>
+        order by id desc
+    </select>
+
+    <delete id="deleteResources">
+        update school_resources
+        set is_deleted = 1
+        where id = #{id}
+    </delete>
+
+    <update id="updateResources" parameterType="com.ccty.noah.domain.database.ResourcesDO">
+        update school_resources
+        set name = #{name},address = #{address},description = #{description},type = #{type}
+        where id = #{id}
+    </update>
+
+</mapper>

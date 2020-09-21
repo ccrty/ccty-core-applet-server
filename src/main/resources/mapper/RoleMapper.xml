@@ -12,10 +12,32 @@
 
     <insert id="insertRole" parameterType="com.ccty.noah.domain.database.RoleDO">
         insert into school_role
-        (type,name,order_index,desc)
+        (name,type,description,order_index)
         values
-        (#{type},#{name},#{orderIndex},#{desc})
+        (#{name},#{type},#{description},#{orderIndex})
     </insert>
+
+    <select id="queryRoleListByCondition" resultType="com.ccty.noah.domain.database.RoleDO">
+        select id,name,order_index,description,type,create_time
+        from school_role
+        where is_deleted = 0
+        <if test="name!='' and name!=null">
+            and name = #{name}
+        </if>
+        order by id desc
+    </select>
+
+    <delete id="deleteRole">
+        update school_role
+        set is_deleted = 1
+        where id = #{id}
+    </delete>
+
+    <update id="updateRole" parameterType="com.ccty.noah.domain.database.RoleDO">
+        update school_role
+        set name = #{name},order_index = #{orderIndex},type = #{type},description = #{description}
+        where id = #{id}
+    </update>
 
 
 </mapper>
