@@ -30,13 +30,13 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
 
-    @ApiModelProperty("获取网站资讯前五条")
+    @ApiModelProperty(value = "获取网站资讯前五条")
     @GetMapping("/top")
     public NoahResult<List<NewsDTO>> getNewsTopFive(){
         return NoahResult.builderSuccess(newsService.getNewsTopFive());
     }
 
-    @ApiOperation("分页获取资讯列表")
+    @ApiOperation(value = "分页获取资讯列表")
     @GetMapping("/page")
     public NoahResult<PageInfo<UserDTO>> getNewsByPage(PageDTO page){
         return NoahResult.builderSuccess(newsService.getNewsByPage(page));

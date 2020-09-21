@@ -11,6 +11,9 @@ import lombok.Data;
 @Data
 public class UserDO extends BaseDO {
 
+    /** 头像 */
+    private String picture;
+
     /**名字*/
     private String name;
 
@@ -42,8 +45,8 @@ public class UserDO extends BaseDO {
     private String area;
 
     /** 用户类型 */
-    private String type;
+    private Integer type;
 
     /** 管理员类型 */
-    private String managerType;
+    private Integer managerType;
 }

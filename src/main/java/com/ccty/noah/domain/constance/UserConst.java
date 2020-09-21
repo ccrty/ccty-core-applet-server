@@ -9,4 +9,13 @@ public interface UserConst {
 
     /** 后台管理员 */
     Integer MANAGER_TYPE = 2;
+
+    /** 小程序会员 */
+    Integer APPLETS_TYPE = 1;
+
+    /** 会员等级 -游客 */
+    Integer MEMBER_LEVEL_TOURIST = 0;
+
+    /** 初始密码 */
+    String INIT_PASSWORD = "123456";
 }

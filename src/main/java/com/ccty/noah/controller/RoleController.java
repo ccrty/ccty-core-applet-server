@@ -27,7 +27,7 @@ public class RoleController {
 
 
 
-    @ApiModelProperty("检验角色名是否存在")
+    @ApiModelProperty(value = "检验角色名是否存在")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name",value="用户名",required = true,paramType = "query",dataType = "string")
     })

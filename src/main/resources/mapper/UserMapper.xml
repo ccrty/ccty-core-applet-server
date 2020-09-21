@@ -38,9 +38,9 @@
 
     <insert id="insertUser" parameterType="com.ccty.noah.domain.database.UserDO">
         insert into school_user
-        (type,manager_type,password,name,sex,phone)
+        (type,manager_type,password,name,sex,phone,picture)
         values
-        (#{type},#{managerType},#{password},#{name},#{sex},#{phone})
+        (#{type},#{managerType},#{password},#{name},#{sex},#{phone},#{picture})
     </insert>
 
     <select id="queryInfoByPhone" resultType="com.ccty.noah.domain.database.UserDO">

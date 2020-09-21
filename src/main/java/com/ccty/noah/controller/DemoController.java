@@ -46,7 +46,7 @@ public class DemoController {
         return NoahResult.builderSuccess(StringUtils.EMPTY);
     }
 
-    @ApiOperation("获取用户信息示例")
+    @ApiOperation(value = "获取用户信息示例")
     @GetMapping("/demo/{id}")
     public NoahResult<DemoDTO> test4(@PathVariable int id){
         DemoDTO demoDTO = demoService.queryUserInfoById(id);
