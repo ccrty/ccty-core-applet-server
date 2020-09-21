@@ -45,17 +45,22 @@ public class WebLogAspect {
 
     }
 
-    @Before("webLog()")
+    @Pointcut("execution(public * com.ccty.noah.controller.applets.*.*(..))")
+    public void applets() {
+
+    }
+
+    @Before("webLog() || applets()")
     public void doBefore(JoinPoint joinPoint) throws Throwable {
 
     }
 
-    @AfterReturning(value = "webLog()", returning = "ret")
+    @AfterReturning(value = "webLog() || applets()", returning = "ret")
     public void doAfterReturning(Object ret) throws Throwable {
 
     }
 
-    @Around("webLog()")
+    @Around("webLog() || applets()")
     public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
         //获取当前请求对象

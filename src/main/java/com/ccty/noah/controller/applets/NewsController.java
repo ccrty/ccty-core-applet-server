@@ -1,4 +1,4 @@
-package com.ccty.noah.controller;
+package com.ccty.noah.controller.applets;
 
 import com.ccty.noah.aop.NoahResult;
 import com.ccty.noah.aop.target.NoahController;

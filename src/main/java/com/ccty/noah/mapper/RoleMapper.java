@@ -1,7 +1,7 @@
 package com.ccty.noah.mapper;
 
 import com.ccty.noah.domain.database.RoleDO;
-import org.mapstruct.Mapper;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
 
