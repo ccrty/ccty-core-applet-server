@@ -3,6 +3,7 @@ package com.ccty.noah.mapper;
 import com.ccty.noah.domain.database.RoleDO;
 import com.ccty.noah.domain.dto.RoleDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public interface RoleMapper {
      * @param name
      * @return
      */
-    List<RoleDO> queryRoleListByCondition(String name);
+    List<RoleDO> queryRoleListByCondition(@Param("name") String name);
 
     /**
      * 删除角色

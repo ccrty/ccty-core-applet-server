@@ -2,6 +2,7 @@ package com.ccty.noah.mapper;
 
 import com.ccty.noah.domain.database.ResourcesDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public interface ResourcesMapper {
      * @param name
      * @return
      */
-    List<ResourcesDO> queryResourcesListByCondition(String name);
+    List<ResourcesDO> queryResourcesListByCondition(@Param("name") String name);
 
     /**
      * 删除资源
