@@ -34,7 +34,7 @@ public interface ResourcesMapper {
      * 删除资源
      * @param id
      */
-    void deleteResources(Integer id);
+    void deleteResources(Long id);
 
     /**
      * 修改资源

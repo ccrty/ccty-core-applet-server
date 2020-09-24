@@ -49,4 +49,7 @@ public class UserDO extends BaseDO {
 
     /** 管理员类型 */
     private Integer managerType;
+
+    /** 角色ID */
+    private Long roleId;
 }

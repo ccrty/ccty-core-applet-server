@@ -10,13 +10,13 @@
     </insert>
 
     <select id="queryResourcesListByCondition" resultType="com.ccty.noah.domain.database.ResourcesDO">
-        select id,name,address,description,type,create_time
+        select id,name,address,description,type,create_time,update_time
         from school_resources
         where is_deleted = 0
         <if test="name!='' and name!=null">
             and name = #{name}
         </if>
-        order by id desc
+        order by update_time desc
     </select>
 
     <delete id="deleteResources">

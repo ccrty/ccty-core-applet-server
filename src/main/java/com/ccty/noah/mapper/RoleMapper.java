@@ -42,11 +42,17 @@ public interface RoleMapper {
      * 删除角色
      * @param id
      */
-    void deleteRole(Integer id);
+    void deleteRole(Long id);
 
     /**
      * 修改角色
      * @param role
      */
     void updateRole(RoleDO role);
+
+    /**
+     * 获取所有角色名称
+     * @return
+     */
+    List<RoleDO> queryAllRoleName();
 }

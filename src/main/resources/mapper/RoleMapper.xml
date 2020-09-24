@@ -18,13 +18,13 @@
     </insert>
 
     <select id="queryRoleListByCondition" resultType="com.ccty.noah.domain.database.RoleDO">
-        select id,name,order_index,description,type,create_time
+        select id,name,order_index,description,type,create_time,update_time
         from school_role
         where is_deleted = 0
         <if test="name!='' and name!=null">
             and name = #{name}
         </if>
-        order by id desc
+        order by update_time desc
     </select>
 
     <delete id="deleteRole">
@@ -38,6 +38,13 @@
         set name = #{name},order_index = #{orderIndex},type = #{type},description = #{description}
         where id = #{id}
     </update>
+
+    <select id="queryAllRoleName" resultType="com.ccty.noah.domain.database.RoleDO">
+        select id,name
+        from school_role
+        where is_deleted = 0
+        order by update_time desc
+    </select>
 
 
 </mapper>

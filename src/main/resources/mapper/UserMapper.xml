@@ -5,7 +5,7 @@
     <select id="queryInfoByUserName" resultType="java.lang.Integer">
        select 1
        from school_user
-       where is_deleted = 0 and name = #{username}
+       where is_deleted = 0 and name = #{username} and type = #{type}
        order by id desc
        limit 1
     </select>
@@ -13,19 +13,19 @@
     <select id="queryUserInfoByUserName" resultType="com.ccty.noah.domain.database.UserDO">
         select id,name,nickname,sex,phone,language,country,city,area
         from school_user
-        where is_deleted = 0 and name = #{name}
+        where is_deleted = 0 and name = #{name} and type = #{type}
         limit 1
     </select>
 
     <select id="queryInfoByUserNameAndPwd" resultType="com.ccty.noah.domain.database.UserDO">
         select id,name,nickname,sex,phone,language,country,city,area
         from school_user
-        where is_deleted = 0 and name = #{name} and password = #{password}
+        where is_deleted = 0 and name = #{name} and password = #{password} and type = #{type}
         limit 1
     </select>
 
     <select id="queryUserListByCondition" resultType="com.ccty.noah.domain.database.UserDO">
-        select id,name,nickname,sex,level,phone,language,country,city,area
+        select id,name,nickname,sex,level,phone,language,country,city,area,role_id
         from school_user
         where is_deleted = 0
         <if test="name!=null and name != ''">
@@ -46,10 +46,19 @@
     <select id="queryInfoByPhone" resultType="com.ccty.noah.domain.database.UserDO">
        select id,name,nickname,sex,phone,language,country,city,area
        from school_user
-       where is_deleted = 0 and phone = #{phone}
+       where is_deleted = 0 and phone = #{phone} and type = #{type}
        order by id desc
        limit 1
     </select>
+
+    <update id="userAuthRole">
+        update school_user
+        set role_id = #{roleId}
+        where id in
+        <foreach collection="list"  item="userId" index="index" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </update>
 
 
 </mapper>

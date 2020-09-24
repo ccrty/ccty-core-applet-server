@@ -5,6 +5,8 @@ import com.ccty.noah.domain.dto.RoleDTO;
 import com.ccty.noah.domain.dto.RoleListConditionDTO;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 /**
  * @author ryan & 缄默
  * @date   2020/09/15
@@ -35,11 +37,17 @@ public interface RoleService {
      * 删除角色
      * @param id
      */
-    void doDeleteRole(Integer id);
+    void doDeleteRole(Long id);
 
     /**
      * 修改角色
      * @param role
      */
     void doUpdateRole(RoleDTO role);
+
+    /**
+     * 获取所有角色名称
+     * @return
+     */
+    List<RoleDTO> getAllRoleName();
 }

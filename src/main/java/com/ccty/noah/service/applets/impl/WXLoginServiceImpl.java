@@ -31,7 +31,7 @@ public class WXLoginServiceImpl implements WXLoginService {
     @Override
     public void doLogin(WXUserLoginDTO login) {
         //用户存在
-        if(userMapper.queryInfoByUserName(login.getNickName())!=null){
+        if(userMapper.queryInfoByUserName(login.getNickName(),UserConst.APPLETS_TYPE)!=null){
             // todo 前端需要的数据
             return;
         }

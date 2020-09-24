@@ -41,7 +41,7 @@ public class ResourcesController {
             @ApiImplicitParam(name = "id",value="资源id",required = true,paramType = "query",dataType = "string")
     })
     @DeleteMapping
-    public NoahResult<Boolean> doDeleteRole(@RequestParam("id")Integer id){
+    public NoahResult<Boolean> doDeleteRole(@RequestParam("id")Long id){
         resourcesService.doDeleteResources(id);
         return NoahResult.builderSuccess(Boolean.TRUE);
     }

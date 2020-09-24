@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author ryan & 缄默
  * @date 2020/09/15
@@ -54,7 +56,7 @@ public class RoleController {
             @ApiImplicitParam(name = "id",value="角色id",required = true,paramType = "query",dataType = "string")
     })
     @DeleteMapping
-    public NoahResult<Boolean> doDeleteRole(@RequestParam("id")Integer id){
+    public NoahResult<Boolean> doDeleteRole(@RequestParam("id")Long id){
         roleService.doDeleteRole(id);
         return NoahResult.builderSuccess(Boolean.TRUE);
     }
@@ -64,5 +66,11 @@ public class RoleController {
     public NoahResult<Boolean> doUpdateRole(@RequestBody @Validated RoleDTO role){
         roleService.doUpdateRole(role);
         return NoahResult.builderSuccess(Boolean.TRUE);
+    }
+
+    @ApiOperation(value = "获取所有角色名")
+    @GetMapping("/name/list")
+    public NoahResult<List<RoleDTO>> getAllRoleName(){
+        return NoahResult.builderSuccess(roleService.getAllRoleName());
     }
 }

@@ -2,6 +2,7 @@ package com.ccty.noah.controller;
 
 import com.ccty.noah.aop.NoahResult;
 import com.ccty.noah.aop.target.NoahController;
+import com.ccty.noah.domain.dto.UserAuthRoleDTO;
 import com.ccty.noah.domain.dto.UserDTO;
 import com.ccty.noah.domain.dto.UserListConditionDTO;
 import com.ccty.noah.domain.dto.UserRegisterDTO;
@@ -93,5 +94,12 @@ public class UserController {
     @PostMapping("/login/phone")
     public NoahResult<UserDTO> doLoginByPhone(@RequestParam("phone")String phone,@RequestParam("code")String code){
         return NoahResult.builderSuccess(userService.doLoginByPhone(phone,code));
+    }
+
+    @ApiOperation(value = "用户授权角色")
+    @PutMapping("/role")
+    public NoahResult<Boolean> userAuthRole(@RequestBody UserAuthRoleDTO userRole){
+        userService.userAuthRole(userRole);
+        return NoahResult.builderSuccess(Boolean.TRUE);
     }
 }

@@ -56,7 +56,7 @@ public class ResourcesServiceImpl implements ResourcesService {
      * @param id
      */
     @Override
-    public void doDeleteResources(Integer id) {
+    public void doDeleteResources(Long id) {
         resourcesMapper.deleteResources(id);
     }
 

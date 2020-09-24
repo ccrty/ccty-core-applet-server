@@ -1,5 +1,6 @@
 package com.ccty.noah.service;
 
+import com.ccty.noah.domain.dto.UserAuthRoleDTO;
 import com.ccty.noah.domain.dto.UserDTO;
 import com.ccty.noah.domain.dto.UserListConditionDTO;
 import com.ccty.noah.domain.dto.UserRegisterDTO;
@@ -69,4 +70,10 @@ public interface UserService {
      * @return
      */
     UserDTO doLoginByPhone(String phone,String code);
+
+    /**
+     * 用户授权角色
+     * @param userRole
+     */
+    void userAuthRole(UserAuthRoleDTO userRole);
 }

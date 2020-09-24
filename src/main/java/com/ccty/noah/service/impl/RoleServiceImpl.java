@@ -80,7 +80,7 @@ public class RoleServiceImpl implements RoleService {
      * @param id
      */
     @Override
-    public void doDeleteRole(Integer id) {
+    public void doDeleteRole(Long id) {
         roleMapper.deleteRole(id);
     }
 
@@ -92,6 +92,16 @@ public class RoleServiceImpl implements RoleService {
     public void doUpdateRole(RoleDTO role) {
         RoleDO roleDO = roleConvertor.roleDOToRoleDTO(role);
         roleMapper.updateRole(roleDO);
+    }
+
+    /**
+     * 获取所有角色名称
+     * @return
+     */
+    @Override
+    public List<RoleDTO> getAllRoleName() {
+        List<RoleDO> roleDOS = roleMapper.queryAllRoleName();
+        return roleConvertor.roleDOListToDTO(roleDOS);
     }
 
 

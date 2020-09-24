@@ -10,10 +10,7 @@ import com.ccty.noah.domain.constance.UserConst;
 import com.ccty.noah.domain.convertor.UserConvertor;
 import com.ccty.noah.domain.database.UserDO;
 import com.ccty.noah.domain.database.UserListConditionDO;
-import com.ccty.noah.domain.dto.CodeDTO;
-import com.ccty.noah.domain.dto.UserDTO;
-import com.ccty.noah.domain.dto.UserListConditionDTO;
-import com.ccty.noah.domain.dto.UserRegisterDTO;
+import com.ccty.noah.domain.dto.*;
 import com.ccty.noah.mapper.UserMapper;
 import com.ccty.noah.service.UserService;
 import com.ccty.noah.util.AliyunSmsUtils;
@@ -56,7 +53,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean validUserName(String name) {
         //用户不存在就抛出错误
-        Optional.ofNullable(userMapper.queryInfoByUserName(name))
+        Optional.ofNullable(userMapper.queryInfoByUserName(name,UserConst.MANAGER_TYPE))
                 .orElseThrow(() -> new NoahException(ExceptionEnum.USER_NAME_ERROR.getCode(), ExceptionEnum.USER_NAME_ERROR.getName()));
         return Boolean.TRUE;
     }
@@ -68,7 +65,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserDTO getUserInfoByUserName(String name) {
-        UserDO userDO = userMapper.queryUserInfoByUserName(name);
+        UserDO userDO = userMapper.queryUserInfoByUserName(name,UserConst.MANAGER_TYPE);
         UserDTO userDTO = userConvertor.userDOToUserDTO(userDO);
         Optional.ofNullable(userDTO)
                 .orElseThrow(() -> new NoahException(ExceptionEnum.USER_NAME_ERROR.getCode(), ExceptionEnum.USER_NAME_ERROR.getName()));
@@ -84,7 +81,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO doLogin(String name,String password) {
         String passwordMd5 = SecureUtil.md5(password);
-        UserDO userDO = userMapper.queryInfoByUserNameAndPwd(name,passwordMd5);
+        UserDO userDO = userMapper.queryInfoByUserNameAndPwd(name,passwordMd5,UserConst.MANAGER_TYPE);
         UserDTO userDTO = userConvertor.userDOToUserDTO(userDO);
         Optional.ofNullable(userDTO)
                 .orElseThrow(() -> new NoahException(ExceptionEnum.USER_PASSWORD_ERROR.getCode(), ExceptionEnum.USER_PASSWORD_ERROR.getName()));
@@ -115,7 +112,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean reValidUserName(String name) {
         //用户不存在就抛出错误
-        if(!ObjectUtils.isEmpty(userMapper.queryInfoByUserName(name))){
+        if(!ObjectUtils.isEmpty(userMapper.queryInfoByUserName(name,UserConst.MANAGER_TYPE))){
             throw new NoahException(ExceptionEnum.USER_REPEAT_ERROR.getCode(),ExceptionEnum.USER_REPEAT_ERROR.getName());
         }
         return Boolean.TRUE;
@@ -186,11 +183,20 @@ public class UserServiceImpl implements UserService {
         //校验短信验证码
         validCode(phone,code);
         //根据手机号获取用户信息
-        UserDO userDO = userMapper.queryInfoByPhone(phone);
+        UserDO userDO = userMapper.queryInfoByPhone(phone,UserConst.MANAGER_TYPE);
         UserDTO userDTO = userConvertor.userDOToUserDTO(userDO);
         Optional.ofNullable(userDTO)
                 .orElseThrow(() -> new NoahException(ExceptionEnum.PHONE_ERROR.getCode(), ExceptionEnum.PHONE_ERROR.getName()));
         return userDTO;
+    }
+
+    /**
+     * 用户授权角色
+     * @param userRole
+     */
+    @Override
+    public void userAuthRole(UserAuthRoleDTO userRole) {
+        userMapper.userAuthRole(userRole.getRoleId(),userRole.getUserList());
     }
 
 }

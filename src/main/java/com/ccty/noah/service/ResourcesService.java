@@ -26,7 +26,7 @@ public interface ResourcesService {
      * 删除资源
      * @param id
      */
-    void doDeleteResources(Integer id);
+    void doDeleteResources(Long id);
 
     /**
      * 修改资源
