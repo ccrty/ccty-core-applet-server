@@ -2,10 +2,7 @@ package com.ccty.noah.controller;
 
 import com.ccty.noah.aop.NoahResult;
 import com.ccty.noah.aop.target.NoahController;
-import com.ccty.noah.domain.dto.RoleDTO;
-import com.ccty.noah.domain.dto.RoleListConditionDTO;
-import com.ccty.noah.domain.dto.UserDTO;
-import com.ccty.noah.domain.dto.UserListConditionDTO;
+import com.ccty.noah.domain.dto.*;
 import com.ccty.noah.service.RoleService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.*;
@@ -72,5 +69,18 @@ public class RoleController {
     @GetMapping("/name/list")
     public NoahResult<List<RoleDTO>> getAllRoleName(){
         return NoahResult.builderSuccess(roleService.getAllRoleName());
+    }
+
+    @ApiOperation(value = "角色绑定资源")
+    @PostMapping("/resources")
+    public NoahResult<Boolean> roleBindResources(@RequestBody @Validated RoleResourcesDTO roleResources){
+        roleService.roleBindResources(roleResources);
+        return NoahResult.builderSuccess(Boolean.TRUE);
+    }
+
+    @ApiOperation(value = "获取角色绑定的资源id")
+    @GetMapping("/resources/{roleId}")
+    public NoahResult<List<Long>> getResourcesIdByRoleId(@PathVariable("roleId")Long roleId){
+        return NoahResult.builderSuccess(roleService.getResourcesIdByRoleId(roleId));
     }
 }

@@ -3,6 +3,7 @@ package com.ccty.noah.service;
 
 import com.ccty.noah.domain.dto.RoleDTO;
 import com.ccty.noah.domain.dto.RoleListConditionDTO;
+import com.ccty.noah.domain.dto.RoleResourcesDTO;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -50,4 +51,17 @@ public interface RoleService {
      * @return
      */
     List<RoleDTO> getAllRoleName();
+
+    /**
+     * 角色绑定资源
+     * @param roleResources
+     */
+    void roleBindResources(RoleResourcesDTO roleResources);
+
+    /**
+     * 根据角色id获取资源id
+     * @param roleId
+     * @return
+     */
+    List<Long> getResourcesIdByRoleId(Long roleId);
 }

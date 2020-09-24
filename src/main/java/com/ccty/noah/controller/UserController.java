@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * @author 缄默
  * @date   2020/08/25
@@ -98,7 +100,7 @@ public class UserController {
 
     @ApiOperation(value = "用户授权角色")
     @PutMapping("/role")
-    public NoahResult<Boolean> userAuthRole(@RequestBody UserAuthRoleDTO userRole){
+    public NoahResult<Boolean> userAuthRole(@RequestBody @Validated UserAuthRoleDTO userRole){
         userService.userAuthRole(userRole);
         return NoahResult.builderSuccess(Boolean.TRUE);
     }

@@ -55,4 +55,24 @@ public interface RoleMapper {
      * @return
      */
     List<RoleDO> queryAllRoleName();
+
+    /**
+     * 根据角色id删除角色资源数据
+     * @param roleId
+     */
+    void deleteRoleResources(Long roleId);
+
+    /**
+     * 插入角色资源数据
+     * @param roleId
+     * @param list
+     */
+    void insertRoleResources(@Param("roleId")Long roleId,@Param("list") List<Long> list);
+
+    /**
+     * 根据角色id获取资源id集合
+     * @param roleId
+     * @return
+     */
+    List<Long> queryResourcesIdsByRoleId(Long roleId);
 }

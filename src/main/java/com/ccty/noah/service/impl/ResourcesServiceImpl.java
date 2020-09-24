@@ -69,4 +69,25 @@ public class ResourcesServiceImpl implements ResourcesService {
         ResourcesDO resourcesDO = resourcesConvertor.DTOToDO(resources);
         resourcesMapper.updateResources(resourcesDO);
     }
+
+    /**
+     * 获取所有资源名称
+     * @return
+     */
+    @Override
+    public List<ResourcesDTO> getAllResourcesName() {
+        List<ResourcesDO> resourcesDOS = resourcesMapper.queryAllResourcesName();
+        return resourcesConvertor.DOListToDTO(resourcesDOS);
+    }
+
+    /**
+     * 获取资源树
+     * @param id
+     * @return
+     */
+    @Override
+    public List<ResourcesDTO> getResourcesTree(String id) {
+        List<ResourcesDO> resourcesDOS = resourcesMapper.queryResourcesByParentId(id);
+        return resourcesConvertor.DOListToDTO(resourcesDOS);
+    }
 }

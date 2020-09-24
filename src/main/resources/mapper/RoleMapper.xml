@@ -46,5 +46,24 @@
         order by update_time desc
     </select>
 
+    <delete id="deleteRoleResources">
+        update school_role_resources
+        set is_deleted = 1
+        where role_id = #{roleId}
+    </delete>
 
+    <insert id="insertRoleResources">
+        insert into school_role_resources
+        (role_id,resources_id)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{roleId},#{item})
+        </foreach>
+    </insert>
+
+    <select id="queryResourcesIdsByRoleId" resultType="java.lang.Long">
+        select resources_id
+        from school_role_resources
+        where is_deleted = 0 and role_id = #{roleId}
+    </select>
 </mapper>

@@ -9,6 +9,7 @@ import com.ccty.noah.domain.database.UserDO;
 import com.ccty.noah.domain.database.UserListConditionDO;
 import com.ccty.noah.domain.dto.RoleDTO;
 import com.ccty.noah.domain.dto.RoleListConditionDTO;
+import com.ccty.noah.domain.dto.RoleResourcesDTO;
 import com.ccty.noah.domain.dto.UserDTO;
 import com.ccty.noah.mapper.RoleMapper;
 import com.ccty.noah.service.RoleService;
@@ -102,6 +103,26 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleDTO> getAllRoleName() {
         List<RoleDO> roleDOS = roleMapper.queryAllRoleName();
         return roleConvertor.roleDOListToDTO(roleDOS);
+    }
+
+    /**
+     * 角色绑定资源
+     * @param roleResources
+     */
+    @Override
+    public void roleBindResources(RoleResourcesDTO roleResources) {
+        roleMapper.deleteRoleResources(roleResources.getRoleId());
+        roleMapper.insertRoleResources(roleResources.getRoleId(),roleResources.getResourcesIdList());
+    }
+
+    /**
+     * 根据角色id获取资源id
+     * @param roleId
+     * @return
+     */
+    @Override
+    public List<Long> getResourcesIdByRoleId(Long roleId) {
+        return roleMapper.queryResourcesIdsByRoleId(roleId);
     }
 
 

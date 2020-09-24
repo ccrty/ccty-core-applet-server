@@ -4,6 +4,8 @@ import com.ccty.noah.domain.dto.ResourcesDTO;
 import com.ccty.noah.domain.dto.ResourcesListConditionDTO;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 /**
  * @author 缄默
  * @date   2020/09/21
@@ -33,4 +35,17 @@ public interface ResourcesService {
      * @param resources
      */
     void doUpdateResources(ResourcesDTO resources);
+
+    /**
+     * 获取所有资源名称
+     * @return
+     */
+    List<ResourcesDTO> getAllResourcesName();
+
+    /**
+     * 获取资源树
+     * @param id
+     * @return
+     */
+    List<ResourcesDTO> getResourcesTree(String id);
 }

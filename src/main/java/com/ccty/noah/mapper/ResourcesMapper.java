@@ -41,4 +41,17 @@ public interface ResourcesMapper {
      * @param resourcesDO
      */
     void updateResources(ResourcesDO resourcesDO);
+
+    /**
+     * 获取所有资源名称
+     * @return
+     */
+    List<ResourcesDO> queryAllResourcesName();
+
+    /**
+     * 根据父id获取资源信息
+     * @param id
+     * @return
+     */
+    List<ResourcesDO> queryResourcesByParentId(String id);
 }

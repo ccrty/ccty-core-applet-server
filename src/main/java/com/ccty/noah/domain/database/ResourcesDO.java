@@ -31,5 +31,10 @@ public class ResourcesDO extends BaseDO {
      */
     private Integer type;
 
+    /**
+     * 父id
+     */
+    private Long parentId;
+
 
 }

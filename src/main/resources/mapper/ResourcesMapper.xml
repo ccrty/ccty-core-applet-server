@@ -4,13 +4,13 @@
 
     <insert id="insertResources" parameterType="com.ccty.noah.domain.database.ResourcesDO">
         insert into school_resources
-        (name,address,description,type)
+        (name,address,description,type,parent_id)
         values
-        (#{name},#{address},#{description},#{type})
+        (#{name},#{address},#{description},#{type},#{parentId})
     </insert>
 
     <select id="queryResourcesListByCondition" resultType="com.ccty.noah.domain.database.ResourcesDO">
-        select id,name,address,description,type,create_time,update_time
+        select id,parent_id,name,address,description,type,create_time,update_time
         from school_resources
         where is_deleted = 0
         <if test="name!='' and name!=null">
@@ -27,8 +27,22 @@
 
     <update id="updateResources" parameterType="com.ccty.noah.domain.database.ResourcesDO">
         update school_resources
-        set name = #{name},address = #{address},description = #{description},type = #{type}
+        set name = #{name},address = #{address},description = #{description},type = #{type},parent_id = #{parentId}
         where id = #{id}
     </update>
+
+    <select id="queryAllResourcesName" resultType="com.ccty.noah.domain.database.ResourcesDO">
+        select id,name
+        from school_resources
+        where is_deleted = 0
+        order by update_time desc
+    </select>
+
+    <select id="queryResourcesByParentId" resultType="com.ccty.noah.domain.database.ResourcesDO">
+        select id,name,parent_id
+        from school_resources
+        where is_deleted = 0 and parent_id = #{id}
+        order by update_time desc
+    </select>
 
 </mapper>

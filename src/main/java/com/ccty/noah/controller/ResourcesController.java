@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author 缄默
  * @date   2020/09/21
@@ -51,5 +53,17 @@ public class ResourcesController {
     public NoahResult<Boolean> doUpdateResources(@RequestBody @Validated ResourcesDTO resources){
         resourcesService.doUpdateResources(resources);
         return NoahResult.builderSuccess(Boolean.TRUE);
+    }
+
+    @ApiOperation(value = "获取所有资源名")
+    @GetMapping("/name/list")
+    public NoahResult<List<ResourcesDTO>> getAllResourcesName(){
+        return NoahResult.builderSuccess(resourcesService.getAllResourcesName());
+    }
+
+    @ApiOperation(value = "根据父资源id获取资源树")
+    @GetMapping("/tree/{id}")
+    public NoahResult<List<ResourcesDTO>> getResourcesTree(@PathVariable("id")String id){
+        return NoahResult.builderSuccess(resourcesService.getResourcesTree(id));
     }
 }

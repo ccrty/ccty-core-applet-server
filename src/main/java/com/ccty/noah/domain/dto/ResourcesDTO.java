@@ -30,5 +30,6 @@ public class ResourcesDTO extends BaseDTO{
     @ApiModelProperty(value = "资源描述")
     private String description;
 
-
+    @ApiModelProperty(value = "父id")
+    private Long parentId;
 }
