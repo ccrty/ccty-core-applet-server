@@ -12,11 +12,35 @@
     </select>
 
     <select id="queryNewsByPage" resultType="com.ccty.noah.domain.database.applets.NewsDO">
-       select id,title,content,url,creator,create_time
+       select id,title,content,url,creator,create_time,update_time,type
        from school_news
-       where is_deleted=0 and type=1
+       where is_deleted=0
+       <if test="title!=null and title!=''">
+           and title = #{title}
+       </if>
+       <if test="type!=null">
+           and type = #{type}
+       </if>
        order by id desc
     </select>
 
+    <insert id="insertNews" parameterType="com.ccty.noah.domain.database.applets.NewsDO">
+        insert into school_news
+        (title,content,url,type)
+        values
+        (#{title},#{content},#{url},#{type})
+    </insert>
+
+    <delete id="deleteNews">
+        update school_news
+        set is_deleted = 1
+        where id = #{id}
+    </delete>
+
+    <update id="updateNews" parameterType="com.ccty.noah.domain.database.applets.NewsDO">
+        update school_news
+        set title = #{title},content = #{content},url = #{url},type = #{type}
+        where id = #{id}
+    </update>
 
 </mapper>

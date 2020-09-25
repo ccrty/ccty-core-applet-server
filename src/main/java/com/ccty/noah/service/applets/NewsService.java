@@ -1,6 +1,7 @@
 package com.ccty.noah.service.applets;
 
 import com.ccty.noah.domain.dto.PageDTO;
+import com.ccty.noah.domain.dto.applets.NewsConditionDTO;
 import com.ccty.noah.domain.dto.applets.NewsDTO;
 import com.github.pagehelper.PageInfo;
 
@@ -20,8 +21,26 @@ public interface NewsService {
 
     /**
      * 分页获取网站资讯前五条
-     * @param page
+     * @param newsConditionDTO
      * @return
      */
-    PageInfo<NewsDTO> getNewsByPage(PageDTO page);
+    PageInfo<NewsDTO> getNewsByPage(NewsConditionDTO newsConditionDTO);
+
+    /**
+     * 新增资讯
+     * @param news
+     */
+    void doInsertNews(NewsDTO news);
+
+    /**
+     * 删除资讯
+     * @param id
+     */
+    void doDeleteNews(Long id);
+
+    /**
+     * 修改资讯
+     * @param news
+     */
+    void doUpdateNews(NewsDTO news);
 }

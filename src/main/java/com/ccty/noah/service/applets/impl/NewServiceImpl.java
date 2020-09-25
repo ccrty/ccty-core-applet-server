@@ -4,6 +4,7 @@ import com.ccty.noah.aop.target.NoahService;
 import com.ccty.noah.domain.convertor.applets.NewsConvertor;
 import com.ccty.noah.domain.database.applets.NewsDO;
 import com.ccty.noah.domain.dto.PageDTO;
+import com.ccty.noah.domain.dto.applets.NewsConditionDTO;
 import com.ccty.noah.domain.dto.applets.NewsDTO;
 import com.ccty.noah.mapper.applets.NewsMapper;
 import com.ccty.noah.service.applets.NewsService;
@@ -45,12 +46,41 @@ public class NewServiceImpl implements NewsService {
      * @return
      */
     @Override
-    public PageInfo<NewsDTO> getNewsByPage(PageDTO pageObj) {
+    public PageInfo<NewsDTO> getNewsByPage(NewsConditionDTO pageObj) {
         Page page = PageHelper.startPage(pageObj.getPageNum(), pageObj.getPageSize());
-        List<NewsDO> newsList = newsMapper.queryNewsByPage();
+        List<NewsDO> newsList = newsMapper.queryNewsByPage(pageObj.getTitle(),pageObj.getType());
         PageInfo pageInfo = new PageInfo<>(page.getResult());
         List<NewsDTO> newsDTOS = newsConvertor.newsDOToDTOs(newsList);
         pageInfo.setList(newsDTOS);
         return pageInfo;
+    }
+
+    /**
+     * 新增资讯
+     * @param news
+     */
+    @Override
+    public void doInsertNews(NewsDTO news) {
+        NewsDO newsDO = newsConvertor.DTOToDO(news);
+        newsMapper.insertNews(newsDO);
+    }
+
+    /**
+     * 删除资讯
+     * @param id
+     */
+    @Override
+    public void doDeleteNews(Long id) {
+        newsMapper.deleteNews(id);
+    }
+
+    /**
+     * 修改资讯
+     * @param news
+     */
+    @Override
+    public void doUpdateNews(NewsDTO news) {
+        NewsDO newsDO = newsConvertor.DTOToDO(news);
+        newsMapper.updateNews(newsDO);
     }
 }

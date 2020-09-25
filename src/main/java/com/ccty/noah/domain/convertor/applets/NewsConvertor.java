@@ -21,4 +21,11 @@ public interface NewsConvertor {
      * @return
      */
     List<NewsDTO> newsDOToDTOs(List<NewsDO> newsDOS);
+
+    /**
+     * dto转do
+     * @param newsDTO
+     * @return
+     */
+    NewsDO DTOToDO(NewsDTO newsDTO);
 }
