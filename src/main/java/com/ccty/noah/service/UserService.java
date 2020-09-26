@@ -1,9 +1,6 @@
 package com.ccty.noah.service;
 
-import com.ccty.noah.domain.dto.UserAuthRoleDTO;
-import com.ccty.noah.domain.dto.UserDTO;
-import com.ccty.noah.domain.dto.UserListConditionDTO;
-import com.ccty.noah.domain.dto.UserRegisterDTO;
+import com.ccty.noah.domain.dto.*;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -76,4 +73,11 @@ public interface UserService {
      * @param userRole
      */
     void userAuthRole(UserAuthRoleDTO userRole);
+
+    /**
+     * 获取用户资源
+     * @param token
+     * @return
+     */
+    List<UserResourcesDTO> getUserResources(String token);
 }

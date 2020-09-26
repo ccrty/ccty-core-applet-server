@@ -2,10 +2,7 @@ package com.ccty.noah.controller;
 
 import com.ccty.noah.aop.NoahResult;
 import com.ccty.noah.aop.target.NoahController;
-import com.ccty.noah.domain.dto.UserAuthRoleDTO;
-import com.ccty.noah.domain.dto.UserDTO;
-import com.ccty.noah.domain.dto.UserListConditionDTO;
-import com.ccty.noah.domain.dto.UserRegisterDTO;
+import com.ccty.noah.domain.dto.*;
 import com.ccty.noah.service.UserService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.*;
@@ -15,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author 缄默
@@ -103,5 +101,11 @@ public class UserController {
     public NoahResult<Boolean> userAuthRole(@RequestBody @Validated UserAuthRoleDTO userRole){
         userService.userAuthRole(userRole);
         return NoahResult.builderSuccess(Boolean.TRUE);
+    }
+
+    @ApiOperation(value = "获取用户资源")
+    @GetMapping("/resources")
+    public NoahResult<List<UserResourcesDTO>> getUserResources(@RequestHeader("X-Token")String token){
+        return NoahResult.builderSuccess(userService.getUserResources(token));
     }
 }

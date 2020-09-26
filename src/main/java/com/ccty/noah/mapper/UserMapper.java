@@ -1,5 +1,6 @@
 package com.ccty.noah.mapper;
 
+import com.ccty.noah.domain.database.ResourcesDO;
 import com.ccty.noah.domain.database.UserDO;
 import com.ccty.noah.domain.database.UserListConditionDO;
 import org.apache.ibatis.annotations.Mapper;
@@ -68,4 +69,11 @@ public interface UserMapper {
      * @param list
      */
     void userAuthRole(@Param("roleId") Long roleId,@Param("list") List<Long> list);
+
+    /**
+     * 获取用户资源
+     * @param name
+     * @return
+     */
+    List<ResourcesDO> queryUserResources(String name);
 }

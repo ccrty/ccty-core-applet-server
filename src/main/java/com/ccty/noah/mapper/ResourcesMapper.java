@@ -43,7 +43,7 @@ public interface ResourcesMapper {
     void updateResources(ResourcesDO resourcesDO);
 
     /**
-     * 获取所有资源名称
+     * 获取所有父级资源名称
      * @return
      */
     List<ResourcesDO> queryAllResourcesName();

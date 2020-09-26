@@ -17,6 +17,16 @@ public class ResourcesDO extends BaseDO {
     private String name;
 
     /**
+     * 资源名称英文
+     */
+    private String nameEn;
+
+    /**
+     * 资源图标
+     */
+    private String icon;
+
+    /**
      * 资源地址
      */
     private String address;

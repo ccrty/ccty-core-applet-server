@@ -18,4 +18,7 @@ public interface UserConst {
 
     /** 初始密码 */
     String INIT_PASSWORD = "123456";
+
+    /** 根资源 */
+    Long ROOT_RESOURCES = 0L;
 }

@@ -60,5 +60,14 @@
         </foreach>
     </update>
 
+    <select id="queryUserResources" resultType="com.ccty.noah.domain.database.ResourcesDO">
+        select r.id,r.name,r.name_en,r.icon,r.address,r.parent_id
+        from school_resources r
+        left join school_role_resources rs on r.id=rs.resources_id and rs.is_deleted=0
+        left join school_role o on rs.role_id=o.id and o.is_deleted=0
+        left join school_user u on o.id=u.role_id and u.is_deleted=0
+        where r.is_deleted=0 and r.type=1 and u.name = #{name}
+    </select>
+
 
 </mapper>

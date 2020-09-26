@@ -7,7 +7,9 @@ import com.ccty.noah.aop.exception.NoahException;
 import com.ccty.noah.aop.target.NoahService;
 import com.ccty.noah.domain.constance.ExceptionEnum;
 import com.ccty.noah.domain.constance.UserConst;
+import com.ccty.noah.domain.convertor.ResourcesConvertor;
 import com.ccty.noah.domain.convertor.UserConvertor;
+import com.ccty.noah.domain.database.ResourcesDO;
 import com.ccty.noah.domain.database.UserDO;
 import com.ccty.noah.domain.database.UserListConditionDO;
 import com.ccty.noah.domain.dto.*;
@@ -17,6 +19,7 @@ import com.ccty.noah.util.AliyunSmsUtils;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author 缄默
@@ -43,6 +47,8 @@ public class UserServiceImpl implements UserService {
     private UserConvertor userConvertor;
     @Autowired
     private AliyunSmsUtils smsUtils;
+    @Autowired
+    private ResourcesConvertor resourcesConvertor;
 
 
     /**
@@ -197,6 +203,37 @@ public class UserServiceImpl implements UserService {
     @Override
     public void userAuthRole(UserAuthRoleDTO userRole) {
         userMapper.userAuthRole(userRole.getRoleId(),userRole.getUserList());
+    }
+
+    /**
+     * 获取用户资源
+     * @param token
+     * @return
+     */
+    @Override
+    public List<UserResourcesDTO> getUserResources(String token) {
+        //获取用户所有资源
+        List<ResourcesDO> resourcesDOS = userMapper.queryUserResources(token);
+        List<ResourcesDTO> resourcesDTOS = resourcesConvertor.DOListToDTO(resourcesDOS);
+        //获取根资源
+        List<ResourcesDTO> rootResourcesList = resourcesDTOS
+                .stream()
+                .filter(data->UserConst.ROOT_RESOURCES==data.getParentId())
+                .collect(Collectors.toList());
+        //子节点根据父id聚合
+        Map<Long,List<ResourcesDTO>> childResourcesMap = resourcesDTOS
+                .stream()
+                .filter(data->UserConst.ROOT_RESOURCES!=data.getParentId())
+                .collect(Collectors.groupingBy(ResourcesDTO::getParentId));
+        List<UserResourcesDTO> userResourcesDTOS = Lists.newArrayList();
+        //组装用户资源
+        rootResourcesList.forEach(data->{
+            UserResourcesDTO userResourcesDTO = new UserResourcesDTO();
+            userResourcesDTO.setResources(data);
+            userResourcesDTO.setResourcesList(childResourcesMap.get(data.getId()));
+            userResourcesDTOS.add(userResourcesDTO);
+        });
+        return userResourcesDTOS;
     }
 
 }

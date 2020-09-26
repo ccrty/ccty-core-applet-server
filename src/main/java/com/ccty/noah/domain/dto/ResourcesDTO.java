@@ -20,6 +20,13 @@ public class ResourcesDTO extends BaseDTO{
     @ApiModelProperty(value = "资源名称")
     private String name;
 
+    @NotEmpty(message = "资源名称英文不能为空")
+    @ApiModelProperty(value = "资源名称英文")
+    private String nameEn;
+
+    @ApiModelProperty(value = "资源图标")
+    private String icon;
+
     @NotEmpty(message = "资源路径不能为空")
     @ApiModelProperty(value = "资源路径")
     private String address;
