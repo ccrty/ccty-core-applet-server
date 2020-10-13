@@ -21,4 +21,5 @@ public interface UserConst {
 
     /** 根资源 */
     Long ROOT_RESOURCES = 0L;
+
 }

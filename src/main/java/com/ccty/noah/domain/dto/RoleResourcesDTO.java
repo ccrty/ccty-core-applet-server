@@ -26,5 +26,11 @@ public class RoleResourcesDTO extends BaseDTO {
     @ApiModelProperty(value = "资源id集合")
     private List<Long> resourcesIdList;
 
+    @ApiModelProperty(value = "选中的资源")
+    private List<Long> checkedList;
+
+    @ApiModelProperty(value = "默认展开的资源")
+    private List<Long> expandedList;
+
 
 }

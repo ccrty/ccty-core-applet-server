@@ -80,7 +80,7 @@ public class RoleController {
 
     @ApiOperation(value = "获取角色绑定的资源id")
     @GetMapping("/resources/{roleId}")
-    public NoahResult<List<Long>> getResourcesIdByRoleId(@PathVariable("roleId")Long roleId){
+    public NoahResult<RoleResourcesDTO> getResourcesIdByRoleId(@PathVariable("roleId")Long roleId){
         return NoahResult.builderSuccess(roleService.getResourcesIdByRoleId(roleId));
     }
 }

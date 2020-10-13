@@ -1,6 +1,7 @@
 package com.ccty.noah.mapper;
 
 import com.ccty.noah.domain.database.RoleDO;
+import com.ccty.noah.domain.database.RoleResourcesDO;
 import com.ccty.noah.domain.dto.RoleDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -74,5 +75,5 @@ public interface RoleMapper {
      * @param roleId
      * @return
      */
-    List<Long> queryResourcesIdsByRoleId(Long roleId);
+    List<RoleResourcesDO> queryResourcesIdsByRoleId(Long roleId);
 }

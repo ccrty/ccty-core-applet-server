@@ -63,5 +63,5 @@ public interface RoleService {
      * @param roleId
      * @return
      */
-    List<Long> getResourcesIdByRoleId(Long roleId);
+    RoleResourcesDTO getResourcesIdByRoleId(Long roleId);
 }

@@ -3,8 +3,10 @@ package com.ccty.noah.service.impl;
 import com.ccty.noah.aop.exception.NoahException;
 import com.ccty.noah.aop.target.NoahService;
 import com.ccty.noah.domain.constance.ExceptionEnum;
+import com.ccty.noah.domain.constance.UserConst;
 import com.ccty.noah.domain.convertor.RoleConvertor;
 import com.ccty.noah.domain.database.RoleDO;
+import com.ccty.noah.domain.database.RoleResourcesDO;
 import com.ccty.noah.domain.database.UserDO;
 import com.ccty.noah.domain.database.UserListConditionDO;
 import com.ccty.noah.domain.dto.RoleDTO;
@@ -16,11 +18,13 @@ import com.ccty.noah.service.RoleService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author ryan & 缄默
@@ -121,8 +125,12 @@ public class RoleServiceImpl implements RoleService {
      * @return
      */
     @Override
-    public List<Long> getResourcesIdByRoleId(Long roleId) {
-        return roleMapper.queryResourcesIdsByRoleId(roleId);
+    public RoleResourcesDTO getResourcesIdByRoleId(Long roleId) {
+        List<RoleResourcesDO> roleResourcesDOS = roleMapper.queryResourcesIdsByRoleId(roleId);
+        RoleResourcesDTO roleResources = new RoleResourcesDTO();
+        roleResources.setCheckedList(roleResourcesDOS.stream().filter(data->UserConst.ROOT_RESOURCES!=data.getParentId()).map(RoleResourcesDO::getResourcesId).collect(Collectors.toList()));
+        roleResources.setExpandedList(roleResourcesDOS.stream().filter(data->UserConst.ROOT_RESOURCES==data.getParentId()).map(RoleResourcesDO::getResourcesId).collect(Collectors.toList()));
+        return roleResources;
     }
 
 

@@ -61,9 +61,10 @@
         </foreach>
     </insert>
 
-    <select id="queryResourcesIdsByRoleId" resultType="java.lang.Long">
-        select resources_id
-        from school_role_resources
-        where is_deleted = 0 and role_id = #{roleId}
+    <select id="queryResourcesIdsByRoleId" resultType="com.ccty.noah.domain.database.RoleResourcesDO">
+        select o.resources_id,r.parent_id
+        from school_role_resources o
+		left join school_resources r on o.resources_id=r.id
+        where o.is_deleted = 0 and r.is_deleted =0 and o.role_id = #{roleId}
     </select>
 </mapper>
