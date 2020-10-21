@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccty.noah.mapper.SystemManagerMapper">
+
+    <insert id="insertCarousel" parameterType="com.ccty.noah.domain.database.CarouselDO">
+        insert into school_carousel
+        (address,type)
+        values
+        (#{address},#{type})
+    </insert>
+
+    <update id="updateCarousel" parameterType="com.ccty.noah.domain.database.CarouselDO">
+        update school_carousel
+        set address = #{address}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCarousel">
+        update school_carousel
+        set is_deleted = 1
+        where id = #{id}
+    </delete>
+
+    <select id="queryCarouselList" resultType="com.ccty.noah.domain.database.CarouselDO">
+        select id,address,type,create_time,creator,update_time
+        from school_carousel
+        where is_deleted = 0
+        order by id desc
+    </select>
+
+
+</mapper>

@@ -13,7 +13,8 @@ public enum ExceptionEnum {
     CODE_INPUT_ERROR("005","验证码错误"),
     CODE_EXPIRED_ERROR("006","验证码过期"),
     PHONE_ERROR("007","手机号不存在"),
-    ROLE_NAME_ERROR("008","角色不存在");
+    ROLE_NAME_ERROR("008","角色不存在"),
+    FILE_UPLOAD_ERROR("009","文件上传失败");
 
     private String code;
     private String name;

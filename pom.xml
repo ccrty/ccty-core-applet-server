@@ -86,6 +86,14 @@
             <version>1.1.10</version>
         </dependency>
 
+        <!-- 腾讯SDK -->
+        <dependency>
+            <groupId>com.qcloud</groupId>
+            <artifactId>cos_api</artifactId>
+            <version>5.6.24</version>
+        </dependency>
+
+        <!-- 工具类 -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
@@ -117,6 +125,12 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>2.5.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mapstruct</groupId>
+                    <artifactId>mapstruct</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- swagger-ui -->
         <dependency>

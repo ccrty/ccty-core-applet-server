@@ -22,4 +22,7 @@ public interface UserConst {
     /** 根资源 */
     Long ROOT_RESOURCES = 0L;
 
+    /** 小程序首页轮播图 */
+    Integer APPLETS_INDEX_CAROUSEL = 1;
+
 }

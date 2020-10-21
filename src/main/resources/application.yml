@@ -8,6 +8,10 @@ spring:
     username: root
     password: mysql_school
     type: com.alibaba.druid.pool.DruidDataSource
+  servlet:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 1000MB
 mybatis:
   mapper-locations: classpath*:mapper/*.xml,classpath*:mapper/*/*.xml
   type-aliases-package: com.ccty.noah.domain.database
@@ -20,3 +24,10 @@ aliyun:
     accessSecret: 7qssSp5jDPmRQvyHzYHSu3HPxSPZAp
     singleName: 校V家
     templateCode: SMS_201717216
+
+tengxun:
+  accessKey: AKIDnZeWAdjci5GDuMtVGm34qN1OURia3bja
+  secretKey: vmQowsXv50lFVWUBK5dvxjJZrzrUYP2U
+  bucket: ap-nanjing
+  bucketName: test-1300839768
+  path: http://test-1300839768.cos.ap-nanjing.myqcloud.com/
