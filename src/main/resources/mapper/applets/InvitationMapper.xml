@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccty.noah.mapper.applets.InvitationMapper">
+    <insert id="insertInvitation" parameterType="com.ccty.noah.domain.database.applets.InvitationDO">
+      insert into school_invitation
+        (data_dict_key,headline,content,status)
+      values
+        (#{data_dict_key},#{headline},#{content},#{status})
+    </insert>
+</mapper>
