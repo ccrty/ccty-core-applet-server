@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccty.noah.mapper.applets.AddressMapper">
+
+    <insert id="insertAddress" parameterType="com.ccty.noah.domain.database.applets.AddressDO">
+        insert into school_address
+        (province_id,province_name,city_id,city_name,area_id,area_name,detail,name,phone,is_default)
+        values
+        (#{provinceId},#{provinceName},#{cityId},#{cityName},#{areaId},#{areaName},#{detail}
+        ,#{name},#{phone},#{isDefault})
+    </insert>
+
+    <select id="queryAddressList" resultType="com.ccty.noah.domain.database.applets.AddressDO">
+        select id,province_id,province_name,city_id,city_name,area_id,
+        area_name,detail,name,phone,is_default,create_time,update_time
+        from school_address
+        where is_deleted = 0
+        order by update_time desc
+    </select>
+
+    <delete id="deleteAddress">
+        update school_address
+        set is_deleted = 1
+        where id = #{id}
+    </delete>
+
+    <update id="updateAddress" parameterType="com.ccty.noah.domain.database.applets.AddressDO">
+        update school_address
+        set province_id=#{provinceId},province_name=#{provinceName},city_id=#{cityId},city_name=#{cityName},
+        area_id=#{areaId},area_name=#{areaName},detail=#{detail},
+        name=#{name},phone=#{phone},is_default=#{isDefault}
+        where id = #{id}
+    </update>
+
+</mapper>
