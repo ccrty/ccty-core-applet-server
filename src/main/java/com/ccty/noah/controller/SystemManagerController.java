@@ -42,7 +42,7 @@ public class SystemManagerController {
 
     @ApiOperation(value = "查询轮播图")
     @GetMapping("/carousel")
-    public NoahResult<PageInfo<CarouselDTO>> doDeletedCarousel(PageDTO page){
+    public NoahResult<PageInfo<CarouselDTO>> getCarouselList(PageDTO page){
         return NoahResult.builderSuccess(systemManagerService.getCarouselList(page));
     }
 }
