@@ -13,4 +13,10 @@
       values
         (#{data_dict_key},#{headline},#{content},#{status})
     </insert>
+
+    <delete id="deleteInvitationType">
+        update school_data_dict
+        set is_deleted = 1
+        where id=#{id}
+    </delete>
 </mapper>

@@ -24,4 +24,10 @@ public interface InvitationMapper {
      * @param dataDictDO
      */
     void insertInvitation(DataDictDO dataDictDO);
+
+    /**
+     * 删除帖子类目
+     * @param id
+     */
+    void deleteInvitationType(Long id);
 }
