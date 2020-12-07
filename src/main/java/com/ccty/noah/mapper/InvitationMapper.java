@@ -20,10 +20,10 @@ public interface InvitationMapper {
     List<DataDictDO> findAllInvitationType();
 
     /**
-     * 发布帖子
+     * 添加帖子类目
      * @param dataDictDO
      */
-    void insertInvitation(DataDictDO dataDictDO);
+    void doInsertInvitationType(String dataDictValue);
 
     /**
      * 删除帖子类目

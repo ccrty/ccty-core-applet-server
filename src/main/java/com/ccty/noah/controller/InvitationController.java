@@ -8,14 +8,13 @@ import com.ccty.noah.service.InvitationService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,10 +38,23 @@ public class InvitationController {
         return NoahResult.builderSuccess(invitationService.findAllInvitationType(page));
     }
 
-    @ApiOperation(value = "删除帖子类目")
+    @ApiOperation(value = "删除类目")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id",value="类目id",required = true,paramType = "query",dataType = "string")
+    })
     @DeleteMapping("/deleteInvitationType")
     public NoahResult<Boolean> doDeleteInvitationType(@RequestParam("id")Long id){
-    invitationService.doDeleteInvitationType(id);
+        invitationService.doDeleteInvitationType(id);
+        return NoahResult.builderSuccess(Boolean.TRUE);
+    }
+
+    @ApiOperation(value = "添加类目")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "dataDictValue",value="类目id",required = true,paramType = "query",dataType = "string")
+    })
+    @PostMapping("insertInvitationType")
+    public NoahResult<Boolean> doInsertInvitationType(@RequestParam("dataDictValue")String dataDictValue){
+        invitationService.doInsertInvitationType(dataDictValue);
         return NoahResult.builderSuccess(Boolean.TRUE);
     }
 }

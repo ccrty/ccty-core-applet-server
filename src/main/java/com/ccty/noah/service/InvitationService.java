@@ -1,5 +1,6 @@
 package com.ccty.noah.service;
 
+import com.ccty.noah.domain.database.DataDictDO;
 import com.ccty.noah.domain.dto.DataDictDTO;
 import com.ccty.noah.domain.dto.PageDTO;
 import com.github.pagehelper.Page;
@@ -20,6 +21,14 @@ public interface InvitationService {
     PageInfo<DataDictDTO> findAllInvitationType(PageDTO page);
 
 
+    /**
+     * 删除帖子类目
+     * @param id
+     */
     void doDeleteInvitationType(Long id);
 
+    /**
+     * 新增帖子类目
+     */
+    void doInsertInvitationType(String dataDictValue);
 }
