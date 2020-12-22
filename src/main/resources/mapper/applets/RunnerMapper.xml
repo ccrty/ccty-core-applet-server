@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccty.noah.mapper.applets.RunnerMapper">
+
+    <insert id="insertRunner" parameterType="com.ccty.noah.domain.database.applets.RunnerDO">
+        insert into school_runner(publish_id,type,weight,cost,remark,advance,rider_id,send_address_id,service_address_id,status)
+        values(publishId,type,weight,cost,remark,advance,riderId,sendAddressId,serviceAddressId,status)
+    </insert>
+
+</mapper>

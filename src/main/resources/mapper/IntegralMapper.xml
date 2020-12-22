@@ -3,8 +3,27 @@
 <mapper namespace="com.ccty.noah.mapper.IntegralMapper">
 
     <select id="queryIntegralByUserId" resultType="java.math.BigDecimal">
-       select available_integral from school_integral where is_deleted = 0 and user_id = #{userId}
+       select available_integral
+       from school_integral
+       where is_deleted = 0 and user_id = #{userId}
     </select>
+
+    <select id="queryIntegralInfoByUserId" resultType="com.ccty.noah.domain.database.applets.IntegralDO">
+        select id,user_id,total_integral,available_integral
+        from school_integral
+        where is_deleted = 0 and user_id = #{userId}
+    </select>
+
+    <update id="updateAvailableIntegralById">
+        update school_integral
+        set available_integral = available_integral - #{totalCost}
+        where id = #{id}
+    </update>
+
+    <insert id="insertIntegralRecord" parameterType="com.ccty.noah.domain.database.applets.IntegralRecordDO">
+        insert into school_integral_record(integral_id,user_id,operate_integral,operate_type,integral_type,integral_status)
+        values(#{integralId},#{userId},#{operateIntegral},#{operateType},#{integralType},#{integralStatus})
+    </insert>
 
 
 </mapper>

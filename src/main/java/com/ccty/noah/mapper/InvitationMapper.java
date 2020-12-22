@@ -21,7 +21,7 @@ public interface InvitationMapper {
 
     /**
      * 添加帖子类目
-     * @param dataDictDO
+     * @param dataDictValue
      */
     void doInsertInvitationType(String dataDictValue);
 
