@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccty.noah.mapper.IntegralMapper">
+
+    <select id="queryIntegralByUserId" resultType="java.math.BigDecimal">
+       select available_integral from school_integral where is_deleted = 0 and user_id = #{userId}
+    </select>
+
+
+</mapper>

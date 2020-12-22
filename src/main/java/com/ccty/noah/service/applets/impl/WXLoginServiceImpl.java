@@ -6,10 +6,14 @@ import com.ccty.noah.domain.constance.UserConst;
 import com.ccty.noah.domain.convertor.applets.WXLoginConvertor;
 import com.ccty.noah.domain.database.UserDO;
 import com.ccty.noah.domain.dto.applets.WXUserLoginDTO;
+import com.ccty.noah.mapper.IntegralMapper;
 import com.ccty.noah.mapper.UserMapper;
 import com.ccty.noah.service.applets.WXLoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
+
+import java.math.BigDecimal;
 
 /**
  * @author 缄默
@@ -23,17 +27,22 @@ public class WXLoginServiceImpl implements WXLoginService {
     private UserMapper userMapper;
     @Autowired
     private WXLoginConvertor loginConvertor;
+    @Autowired
+    private IntegralMapper integralMapper;
 
     /**
      * 微信登陆 首次登陆先注册
      * @param login
      */
     @Override
-    public void doLogin(WXUserLoginDTO login) {
+    public WXUserLoginDTO doLogin(WXUserLoginDTO login) {
         //用户存在
-        if(userMapper.queryInfoByUserName(login.getNickName(),UserConst.APPLETS_TYPE)!=null){
-            // todo 前端需要的数据
-            return;
+        Long userId = userMapper.queryInfoByUserName(login.getNickName(), UserConst.APPLETS_TYPE);
+        if(userId!=null){
+            BigDecimal integral = integralMapper.queryIntegralByUserId(userId);
+            WXUserLoginDTO user = new WXUserLoginDTO();
+            user.setIntegral(integral==null?BigDecimal.ZERO:integral);
+            return user;
         }
         UserDO user = loginConvertor.WXLoginDTOToUserDO(login);
         user.setName(login.getNickName());
@@ -42,5 +51,6 @@ public class WXLoginServiceImpl implements WXLoginService {
         user.setPassword(SecureUtil.md5(UserConst.INIT_PASSWORD));
         user.setType(UserConst.APPLETS_TYPE);
         userMapper.insertUser(user);
+        return new WXUserLoginDTO();
     }
 }

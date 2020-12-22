@@ -23,7 +23,7 @@ public interface UserMapper {
      * @param type
      * @return
      */
-    Integer queryInfoByUserName(@Param("username") String username,@Param("type")Integer type);
+    Long queryInfoByUserName(@Param("username") String username,@Param("type")Integer type);
 
     /**
      * 根据用户名获取用户信息

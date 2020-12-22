@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ccty.noah.mapper.UserMapper">
 
-    <select id="queryInfoByUserName" resultType="java.lang.Integer">
-       select 1
+    <select id="queryInfoByUserName" resultType="java.lang.Long">
+       select id
        from school_user
        where is_deleted = 0 and name = #{username} and type = #{type}
        order by id desc
