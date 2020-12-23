@@ -31,4 +31,10 @@ public interface InvitationService {
      * 新增帖子类目
      */
     void doInsertInvitationType(String dataDictValue);
+
+    /**
+     * 修改帖子类目删除标志
+     * @param id
+     */
+    void doUpdateInvitationTypeDel(Long id);
 }

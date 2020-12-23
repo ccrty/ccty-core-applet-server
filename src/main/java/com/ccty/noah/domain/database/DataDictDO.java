@@ -16,4 +16,7 @@ public class DataDictDO extends BaseDO {
 
     /**数据字段_value**/
     private String dataDictValue;
+
+    /**数据字段_value**/
+    private String isDeleted;
 }

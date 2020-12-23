@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @ApiModel("数据字典对象")
 @Data
@@ -24,4 +25,7 @@ public class DataDictDTO extends BaseDTO {
 
     @ApiModelProperty("数据字段_value")
     private String dataDictValue;
+
+    @ApiModelProperty("数据字段_删除标识")
+    public String isDeleted;
 }

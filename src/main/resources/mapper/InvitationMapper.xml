@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ccty.noah.mapper.InvitationMapper">
     <select id="findAllInvitationType"  resultType="com.ccty.noah.domain.database.DataDictDO">
-        select id,data_dict_type,data_dict_account,data_dict_key,data_dict_value
+        select id,data_dict_type,data_dict_account,data_dict_key,data_dict_value,case is_deleted when 1 then '已作废' else '正常' end as is_Deleted
         from  school_data_dict
-        where is_deleted = 0 and data_dict_type = 1
+        where  data_dict_type = 1
     </select>
 
     <insert id="insertInvitation" parameterType="com.ccty.noah.domain.database.DataDictDO">
@@ -19,6 +19,12 @@
         set is_deleted = 1
         where id=#{id}
     </delete>
+
+    <update id="updateInvitationType">
+        update school_data_dict
+        set is_deleted = 0
+        where id=#{id}
+    </update>
 
     <insert id="doInsertInvitationType" parameterType="com.ccty.noah.domain.database.DataDictDO">
         INSERT INTO school_data_dict (

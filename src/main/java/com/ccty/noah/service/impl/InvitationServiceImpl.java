@@ -46,4 +46,9 @@ public class InvitationServiceImpl implements InvitationService{
         invitationMapper.doInsertInvitationType(dataDictValue);
     }
 
+    @Override
+    public void doUpdateInvitationTypeDel(Long id) {
+        invitationMapper.updateInvitationType(id);
+    }
+
 }

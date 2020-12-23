@@ -21,7 +21,7 @@ public interface InvitationMapper {
 
     /**
      * 添加帖子类目
-     * @param dataDictDO
+     * @param dataDictValue
      */
     void doInsertInvitationType(String dataDictValue);
 
@@ -30,4 +30,9 @@ public interface InvitationMapper {
      * @param id
      */
     void deleteInvitationType(Long id);
+
+    /**
+     * 修改帖子删除状态
+     */
+    void updateInvitationType(Long id);
 }

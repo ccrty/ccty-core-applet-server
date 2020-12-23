@@ -57,4 +57,14 @@ public class InvitationController {
         invitationService.doInsertInvitationType(dataDictValue);
         return NoahResult.builderSuccess(Boolean.TRUE);
     }
+
+    @ApiOperation(value = "修改类目")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id",value="类目id",required = true,paramType = "query",dataType = "string")
+    })
+    @PostMapping("/updateInvitationType")
+    public NoahResult<Boolean> doUpdateInvitationType(@RequestParam("id")Long id){
+        invitationService.doUpdateInvitationTypeDel(id);
+        return NoahResult.builderSuccess(Boolean.TRUE);
+    }
 }
