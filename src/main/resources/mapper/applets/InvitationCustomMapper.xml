@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccty.noah.mapper.applets.InvitationCustomMapper">
+    <select id="findAllInvitationType"  resultType="com.ccty.noah.domain.database.DataDictDO">
+        select id,data_dict_type,data_dict_account,data_dict_key,data_dict_value
+        from  school_data_dict
+        where is_deleted = 0 and data_dict_type = 1
+    </select>
+
+</mapper>
