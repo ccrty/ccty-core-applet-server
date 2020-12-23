@@ -27,7 +27,7 @@ import java.util.List;
 @NoahController
 @Slf4j
 @RequestMapping("/{version}/api/invitation/invitationType")
-public class InvitationController {
+public class InvitationTypeController {
 
     @Autowired
     private InvitationService invitationService;

@@ -30,8 +30,7 @@ public class WXLoginController {
 
     @ApiOperation(value = "微信登陆 首次登陆注册用户")
     @PostMapping("/login")
-    public NoahResult<Boolean> doLogin(@RequestBody @Validated WXUserLoginDTO user){
-        loginService.doLogin(user);
-        return NoahResult.builderSuccess(Boolean.TRUE);
+    public NoahResult<WXUserLoginDTO> doLogin(@RequestBody @Validated WXUserLoginDTO user){
+        return NoahResult.builderSuccess(loginService.doLogin(user));
     }
 }
