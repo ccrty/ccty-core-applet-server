@@ -1,6 +1,7 @@
 package com.ccty.noah.mapper.applets;
 
 import com.ccty.noah.domain.database.applets.NewsDO;
+import com.ccty.noah.domain.database.applets.RunnerConditionDO;
 import com.ccty.noah.domain.database.applets.RunnerDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,4 +22,19 @@ public interface RunnerMapper {
      * @param runner
      */
     void insertRunner(RunnerDO runner);
+
+    /**
+     * 查询订单信息
+     * @param condition
+     * @return
+     */
+    List<RunnerDO> queryRunnerList(RunnerConditionDO condition);
+
+    /**
+     * 修改订单状态
+     * @param orderId
+     * @param riderId
+     * @param code
+     */
+    void updateOrderStatus(@Param("orderId") Long orderId,@Param("riderId") Long riderId,@Param("code") Integer code);
 }

@@ -7,4 +7,19 @@
         values(publishId,type,weight,cost,remark,advance,riderId,sendAddressId,serviceAddressId,status)
     </insert>
 
+    <select id="queryRunnerList" parameterType="com.ccty.noah.domain.database.applets.RunnerConditionDO" resultType="java.util.List">
+        select publish_id,type,weight,cost,remark,advance,rider_id,send_address_id,service_add_id,status
+        from school_runner
+        where 1=1
+        <if test="status!=null">
+            and status = #{status}
+        </if>
+    </select>
+
+    <update id="updateOrderStatus">
+        update school_runner
+        set rider_id = #{riderId},status = #{code}
+        where id = #{orderId}
+    </update>
+
 </mapper>
