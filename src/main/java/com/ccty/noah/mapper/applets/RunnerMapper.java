@@ -31,10 +31,24 @@ public interface RunnerMapper {
     List<RunnerDO> queryRunnerList(RunnerConditionDO condition);
 
     /**
-     * 修改订单状态
+     * 修改订单状态和骑手id
      * @param orderId
      * @param riderId
      * @param code
      */
-    void updateOrderStatus(@Param("orderId") Long orderId,@Param("riderId") Long riderId,@Param("code") Integer code);
+    void updateOrderStatusAndRiderId(@Param("orderId") Long orderId,@Param("riderId") Long riderId,@Param("code") Integer code);
+
+    /**
+     * 修改订单状态
+     * @param orderId
+     * @param code
+     */
+    void updateOrderStatusByBusId(@Param("orderId") String orderId,@Param("code") Integer code);
+
+    /**
+     * 查询骑手id和金额
+     * @param orderId
+     * @return
+     */
+    RunnerDO queryRiderIdAndPriceByBusId(String orderId);
 }

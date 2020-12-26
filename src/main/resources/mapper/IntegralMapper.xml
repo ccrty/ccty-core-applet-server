@@ -21,9 +21,39 @@
     </update>
 
     <insert id="insertIntegralRecord" parameterType="com.ccty.noah.domain.database.applets.IntegralRecordDO">
-        insert into school_integral_record(integral_id,user_id,operate_integral,operate_type,integral_type,integral_status)
-        values(#{integralId},#{userId},#{operateIntegral},#{operateType},#{integralType},#{integralStatus})
+        insert into school_integral_record(integral_id,user_id,operate_integral,operate_type,integral_type,integral_status,integral_sources_id)
+        values(#{integralId},#{userId},#{operateIntegral},#{operateType},#{integralType},#{integralStatus},#{integralSourcesId})
     </insert>
+
+    <select id="queryFreezeByOrderId" resultType="com.ccty.noah.domain.database.applets.IntegralRecordDO">
+        select id,integral_id,user_id,operate_type
+        from school_integral_record
+        where integral_sources_id = #{orderId} and integral_status = 4 and operate_type = 2
+    </select>
+
+    <update id="updateTotalIntegral">
+        update school_integral
+        set total_integral = total_integral - #{operateIntegral}
+        where id = #{integralId}
+    </update>
+
+    <update id="updateIntegralRecordByBusId">
+        update school_integral_record
+        set status = #{code}
+        where business_id = #{orderId}
+    </update>
+
+    <update id="updateIntegralByUserId">
+        update school_integral
+        set total_integral = total_integral + #{totalCost},available_integral = available_integral + #{totalCost}
+        where user_id = #{riderId}
+    </update>
+
+    <select id="queryIntegralIdByUserId" resultType="java.lang.Long">
+        select id
+        from school_integral
+        where user_id = #{riderId}
+    </select>
 
 
 </mapper>

@@ -7,7 +7,10 @@ package com.ccty.noah.domain.constance;
 public interface IntegralConst {
 
     //操作类型-扣除
-    Integer OPERATE_SUBTRACT = 1;
+    Integer OPERATE_SUBTRACT = 2;
+
+    //操作类型-增加
+    Integer OPERATE_ADD = 1;
 
     /**
      * 积分类型

@@ -31,12 +31,16 @@ public class IntegralRecordDO extends BaseDO {
     /**积分状态*/
     private Integer integralStatus;
 
-    public IntegralRecordDO(Long integralId, Long userId, BigDecimal operateIntegral, Integer operateType, Integer integralType, Integer integralStatus) {
+    /**积分来源id*/
+    private String integerSourcesId;
+
+    public IntegralRecordDO(Long integralId, Long userId, BigDecimal operateIntegral, Integer operateType, Integer integralType, Integer integralStatus, String integerSourcesId) {
         this.integralId = integralId;
         this.userId = userId;
         this.operateIntegral = operateIntegral;
         this.operateType = operateType;
         this.integralType = integralType;
         this.integralStatus = integralStatus;
+        this.integerSourcesId = integerSourcesId;
     }
 }

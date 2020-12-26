@@ -51,4 +51,7 @@ public class RunnerDTO extends BaseDTO {
     @ApiModelProperty(value = "订单状态",example = "0-已发布 1-接收派送中 2-订单结束 3-订单取消 4-订单异常")
     private Integer status;
 
+    @ApiModelProperty("业务id")
+    private String businessId;
+
 }

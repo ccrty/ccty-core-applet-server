@@ -15,7 +15,8 @@ public enum ExceptionEnum {
     PHONE_ERROR("007","手机号不存在"),
     ROLE_NAME_ERROR("008","角色不存在"),
     FILE_UPLOAD_ERROR("009","文件上传失败"),
-    USER_INVITATION_ISSUFF("010","用户积分不足");
+    USER_INVITATION_ISSUFF("010","用户积分不足"),
+    INVITATION_NOT_FOUND("011","未查询到积分使用情况");
 
     private String code;
     private String name;

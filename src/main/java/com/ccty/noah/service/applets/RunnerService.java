@@ -37,5 +37,5 @@ public interface RunnerService {
      * 结束跑腿订单
      * @param orderId
      */
-    void finishRunnerOrder(Long orderId);
+    void finishRunnerOrder(String orderId);
 }

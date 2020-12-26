@@ -42,4 +42,7 @@ public class RunnerDO extends BaseDO {
     /**订单状态",example = "0-已发布 1-接收派送中 2-订单结束 3-订单取消 4-订单异常*/
     private Integer status;
 
+    /**业务id*/
+    private String businessId;
+
 }

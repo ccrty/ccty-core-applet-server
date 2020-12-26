@@ -25,6 +25,7 @@ import org.springframework.util.ObjectUtils;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author 缄默
@@ -55,14 +56,17 @@ public class RunnerServiceImpl implements RunnerService {
         if(!ObjectUtils.isEmpty(integral) && integral.getAvailableIntegral().compareTo(totalCost) == -1){
             throw new NoahException(ExceptionEnum.USER_INVITATION_ISSUFF.getCode(),ExceptionEnum.USER_INVITATION_ISSUFF.getName());
         }
-        //冻结用户积分并插入积分记录
-        integralMapper.updateAvailableIntegralById(runner.getId(),totalCost);
-        IntegralRecordDO integralRecord = new IntegralRecordDO(runner.getId(),runner.getPublishId(),totalCost, IntegralConst.OPERATE_SUBTRACT,IntegralConst.IntegralType.RUNNER.getCode(),IntegralConst.IntegralStatus.FREEZING.getCode());
-        integralMapper.insertIntegralRecord(integralRecord);
         //插入跑腿订单
         RunnerDO runnerDO = runnerConvertor.DTOToDO(runner);
+        String uuid = UUID.randomUUID().toString();
         runnerDO.setStatus(RunnerConst.OrderStatus.PUBLISHED.getCode());
+        runnerDO.setBusinessId(uuid);
         runnerMapper.insertRunner(runnerDO);
+        //冻结用户积分并插入积分记录
+        integralMapper.updateAvailableIntegralById(integral.getId(),totalCost);
+        IntegralRecordDO integralRecord = new IntegralRecordDO(integral.getId(),runner.getPublishId(),totalCost, IntegralConst.OPERATE_SUBTRACT,IntegralConst.IntegralType.RUNNER.getCode(),IntegralConst.IntegralStatus.FREEZING.getCode(),uuid);
+        integralMapper.insertIntegralRecord(integralRecord);
+
     }
 
     /**
@@ -87,22 +91,41 @@ public class RunnerServiceImpl implements RunnerService {
      */
     @Override
     public void receiveRunnerOrder(Long orderId, Long riderId) {
-        runnerMapper.updateOrderStatus(orderId,riderId,RunnerConst.OrderStatus.DELIVERING.getCode());
+        runnerMapper.updateOrderStatusAndRiderId(orderId,riderId,RunnerConst.OrderStatus.DELIVERING.getCode());
 
     }
 
     /**
      * 结束跑腿订单
-     * @param orderId
+     * @param orderId /
      */
     @Override
-    public void finishRunnerOrder(Long orderId) {
+    public void finishRunnerOrder(String orderId) {
         //修改订单状态
-
+        runnerMapper.updateOrderStatusByBusId(orderId,RunnerConst.OrderStatus.FINISHED.getCode());
         //查询积分情况 扣减用户积分
-
+        //查询冻结积分
+        IntegralRecordDO integralRecordDO = integralMapper.queryFreezeByOrderId(orderId);
+        if(ObjectUtils.isEmpty(integralRecordDO)){
+            throw new NoahException(ExceptionEnum.INVITATION_NOT_FOUND.getCode(),ExceptionEnum.INVITATION_NOT_FOUND.getName());
+        }
+        //扣减积分
+        integralMapper.updateTotalIntegral(integralRecordDO.getIntegralId(),integralRecordDO.getOperateIntegral());
+        //修改积分状态
+        integralMapper.updateIntegralRecordByBusId(orderId,IntegralConst.IntegralStatus.DEDUCTION.getCode());
         //骑手增加积分
+        //查询骑手id和金额
+        RunnerDO runner = runnerMapper.queryRiderIdAndPriceByBusId(orderId);
+        //总费用为选择费用+垫付费用
+        BigDecimal totalCost = runner.getCost().add(ObjectUtils.isEmpty(runner.getAdvance())?BigDecimal.ZERO:runner.getAdvance());
+        //增加总积分和可用积分
+        integralMapper.updateIntegralByUserId(runner.getRiderId(),totalCost);
+        Long integralId = integralMapper.queryIntegralIdByUserId(runner.getRiderId());
+        //生成积分记录
+        IntegralRecordDO integralRecord = new IntegralRecordDO(integralId,runner.getRiderId(),totalCost, IntegralConst.OPERATE_ADD,IntegralConst.IntegralType.RUNNER.getCode(),IntegralConst.IntegralStatus.EFFECTIVE.getCode(),orderId);
+        integralMapper.insertIntegralRecord(integralRecord);
     }
+
 
 
 }

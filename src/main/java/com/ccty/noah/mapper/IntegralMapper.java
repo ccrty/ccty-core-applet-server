@@ -42,4 +42,38 @@ public interface IntegralMapper {
      * @param integralRecord
      */
     void insertIntegralRecord(IntegralRecordDO integralRecord);
+
+    /**
+     * 查询冻结积分情况
+     * @param orderId
+     * @return
+     */
+    IntegralRecordDO queryFreezeByOrderId(String orderId);
+
+    /**
+     * 扣减总积分
+     * @param integralId
+     * @param operateIntegral
+     */
+    void updateTotalIntegral(@Param("integralId") Long integralId,@Param("operateIntegral") BigDecimal operateIntegral);
+
+    /**
+     * 修改积分记录状态
+     * @param orderId
+     * @param code
+     */
+    void updateIntegralRecordByBusId(@Param("orderId") String orderId,@Param("code") Integer code);
+
+    /**
+     * 增加总积分和可用积分
+     * @param riderId
+     * @param totalCost
+     */
+    void updateIntegralByUserId(@Param("riderId") Long riderId,@Param("totalCost") BigDecimal totalCost);
+
+    /**
+     * 查询积分id
+     * @param riderId
+     */
+    Long queryIntegralIdByUserId(Long riderId);
 }
