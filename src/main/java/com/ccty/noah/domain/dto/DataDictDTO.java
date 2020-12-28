@@ -5,7 +5,11 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+
+/**
+ * @author ryan
+ * @date 2020/12/28
+ */
 
 @ApiModel("数据字典对象")
 @Data
@@ -28,4 +32,11 @@ public class DataDictDTO extends BaseDTO {
 
     @ApiModelProperty("数据字段_删除标识")
     public String isDeleted;
+
+    @ApiModelProperty("是否选中")
+    public boolean checked;
+
+    public void setChecked(boolean checked) {
+        this.checked = false;
+    }
 }
