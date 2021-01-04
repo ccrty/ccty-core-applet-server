@@ -57,6 +57,4 @@ public class RunnerController {
         runnerService.finishRunnerOrder(orderId);
         return NoahResult.builderSuccess(Boolean.TRUE);
     }
-
-
 }
