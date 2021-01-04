@@ -53,7 +53,7 @@ public class RunnerController {
 
     @ApiOperation(value = "结束跑腿订单")
     @PostMapping("/finish")
-    public NoahResult<Boolean> finishRunnerOrder(@RequestParam("orderId")Long orderId){
+    public NoahResult<Boolean> finishRunnerOrder(@RequestParam("orderId")String orderId){
         runnerService.finishRunnerOrder(orderId);
         return NoahResult.builderSuccess(Boolean.TRUE);
     }
